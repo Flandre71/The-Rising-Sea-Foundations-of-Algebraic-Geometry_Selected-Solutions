@@ -28,6 +28,9 @@
 	{}
 \theoremstyle{breakstyle}
 \newtheorem{exercise}{Exercise}[section]
+\DeclareMathOperator{\id}{Id}
+\DeclareMathOperator{\mor}{Mor}
+\DeclareMathOperator{\colim}{Colim}
 \renewcommand{\theexercise}{\currchapter.\thesection.\Alph{exercise}}
 \title{Chapter 1 - Just enough category theory to be dangerous}
 \author{Flandre}
@@ -42,16 +45,17 @@
 		\begin{enumerate}
 			\item Since there's only one object, namely $e$, in the category, all the morphisms in such category will send $e$ to $e$.
 				\begin{itemize}
-					\item The combinations of mrophisms are always associative.
+					\item The combinations of morphisms are always associative.
 					\item There must exist an identity morphism, which'll be the identity in the group.
 					\item Since it's a groupoid, every morphism has a inverse.
 				\end{itemize}
 				\emph{ (In fact every group can be represented using the language of vategory. Consider Cayley's Theorem and we ca see every group element can be regarded as an automorphism, satisfying the case of morphism to a object itself.) }
 			\item We consider a category $\mathscr{C}$ whose objects are $A,B$. Consider
 				$$
-				\mathrm{Mor}(A,B)=\{id_{A},id_{B}\}
+				\mathrm{Mor}(\mathscr{C})=\{\id_{A},\id_{B}\}
 				.$$ 
-				and we can see that is's a groupiod without being associative, therefore not a group.
+				and we can see that it's a groupiod where the elements corresponding to $\id_{A},\id_{B}$ cannot have multiplication
+                , therefore not a group.
 		\end{enumerate}
 \end{exercise}
 
@@ -65,10 +69,10 @@
 \end{exercise}
 
 \begin{exercise}
-	% \leavevmode \vspace{-\baselineskip}
-	% 	\begin{enumerate}
-	% 		\item In the case of finite cases, the set of bases of $Vec_{k},Vec_{k}^{\vee}$ is finite. Therefore the functor $(\cdot)^{\vee}$ must be isomorphism.
-	% 	\end{enumerate}
+	\leavevmode \vspace{-\baselineskip}
+		\begin{enumerate}
+			\item In the case of finite cases, the set of bases of $Vec_{k},Vec_{k}^{\vee}$ is finite. Therefore the functor $(\cdot)^{\vee}$ must be isomorphism.
+		\end{enumerate}
 	\emph{skipped (require \textbf{1.1.21} to solve.)}
 \end{exercise}
 
@@ -368,34 +372,30 @@ X_1 \arrow[r, dashed]               & Z
 \end{exercise}
 
 \begin{exercise}
-	\emph{(Failed, not finished.)}\\
-	Given
+    \emph{(}$ Y\longrightarrow Y\times _{Z}Y $\emph{is defined by identical embedding)}
 	$$
 	\begin{tikzcd}
 X_1\times_Y X_2 \arrow[d] \arrow[r] & X_2 \arrow[d] &   \\
 X_1 \arrow[r]                       & Y \arrow[rd]  &   \\
                                     &               & Z
 	\end{tikzcd}
-	.$$ 
+	$$ 
 	We need to prove the diagram below is a Cartesian Square:
 	$$
 	\begin{tikzcd}
 X_1\times_Y X_2 \arrow[d] \arrow[r] & X_1\times_Z X_2 \arrow[d] \\
 Y \arrow[r]                         & Y\times_Z Y              
 	\end{tikzcd}
-	.$$ 
-	From the previous exercise we know there exist a unique factoring map
-	$$
-	X_1\times_{Y}X_2\longrightarrow X_{1}\times _{Z}X_2
-	.$$ 
-	Notice there exist a unique map $X_1\times _{Y}X_2\longrightarrow X_1\times _{Z}X_2$:
-	$$
-	\begin{tikzcd}
-X_1\times_ZX_2 \arrow[d] \arrow[r] \arrow[rd, "\exists!" description, dotted] & X_2 \arrow[rd]                 &                                             \\
-X_1 \arrow[rd]                                                                & Y\times_ZY \arrow[d] \arrow[r] & Y \arrow[d] \arrow[ld, Rightarrow, no head] \\
-                                                                              & Y \arrow[r]                    & Z                                          
-	\end{tikzcd}
-	.$$ 
+	$$ 
+    Which becomes trivial when we notice
+    $$
+    \begin{tikzcd}
+    X_1\times_{Y}X_2 \arrow[rd, "\exists!" description, dotted] \arrow[rrd] \arrow[rdd] &                                                                                 &                                             &             \\
+                                                                                        & X_1\times_{Z}X_2 \arrow[rd, "\exists!" description, dotted] \arrow[d] \arrow[r] & X_2 \arrow[rd]                              &             \\
+                                                                                        & X_1 \arrow[rd]                                                                  & Y\times_{Z}Y \arrow[d] \arrow[r]            & Y \arrow[d] \\
+                                                                                        &                                                                                 & Y \arrow[ru, Rightarrow,no head] \arrow[r] & Z          
+    \end{tikzcd}
+    $$
 \end{exercise}
 
 \begin{exercise}
@@ -452,61 +452,55 @@ X \arrow[r, "\alpha"']                                                          
 \end{exercise}
 
 \begin{exercise}
-	\emph{(Failed)}
-	\begin{enumerate}
-		\item 
-			\begin{itemize}
-				\item When $\pi$ is a monomorphism, we let $X\times _{Y}X=X$ by
-					$$
-					\begin{tikzcd}
-				X \arrow[d, "="'] \arrow[r, "="] & X \arrow[d, "\pi"] \\
-				X \arrow[r, "\pi"']              & Y                 
-					\end{tikzcd}
-					$$ 
-					Now for any $A$ satisfying the commutative diagram below, it must factor through $X$ uniquely by the definition of monomorphism.
-					$$
-					\begin{tikzcd}
-				A \arrow[rdd] \arrow[rrd] \arrow[rd, "\exists!" description, dotted] &                                  &                    \\
-        		                                                             		& X \arrow[d, "="'] \arrow[r, "="] & X \arrow[d, "\pi"] \\
-        		                                                             		& X \arrow[r, "\pi"']              & Y                 
-					\end{tikzcd}
-					$$ 
-				\item When $X\times _{Y}X$ exists, then any $A$ letting the diagram below commute
-					$$
-					\begin{tikzcd}
-A \arrow[rdd] \arrow[rrd] \arrow[rd, "\exists!" description, dotted] &                                &                    \\
-                                                                     & X\times_YX \arrow[d] \arrow[r] & X \arrow[d, "\pi"] \\
-                                                                     & X \arrow[r, "\pi"']            & Y                 
-					\end{tikzcd}
-					,$$ 
-					whose morphism to $X\times _{Y}X$ will factor through $X\times _{Y}X$ uniquely. Therefore any two map:
-					$$
-					\alpha,\ \beta:A\longrightarrow X
-					$$ 
-					can be factorized into
-					$$
-					\alpha= \alpha'\circ p,\ \beta=\beta'\circ p
-					$$ 
-					Where $p:A\longrightarrow X\times _{Y}X$ and $\alpha',\ \beta':X\times_{Y}X\longrightarrow X$. \\
-					$$
-					\begin{tikzcd}
-A \arrow[rdd, "\alpha"'] \arrow[rrd, "\beta"] \arrow[rd, "p" description, dotted] &                                                      &                    \\
-                                                                                  & X\times_YX \arrow[d, "\alpha'"'] \arrow[r, "\beta'"] & X \arrow[d, "\pi"] \\
-                                                                                  & X \arrow[r, "\pi"']                                  & Y                 
-					\end{tikzcd}
-					$$ 
-					So if
-					$$
-					\pi\circ \alpha=\pi\circ \beta
-					$$ 
-					We'll have
-					$$
-					\pi\circ \alpha'\circ p=\pi\circ \beta'\circ p
-					$$ 
-					Since $X\times _{Y}X$ is a fibered product, $\pi\alpha'=\pi\beta'$.
-			\end{itemize}
-		\item 
-		\end{enumerate}
+    \leavevmode \vspace{-\baselineskip}
+    \begin{itemize}
+    	\item 
+            When $\pi$ is a monomorphism:
+            For
+            $$
+            \begin{tikzcd}
+                X\times_{Y}X \arrow[r] \arrow[d] & X \arrow[d, "\pi"] \\
+                X \arrow[r, "\pi"]               & Y                 
+            \end{tikzcd}
+            $$
+            From the definition of monomorphism, we know there's only one morphism in $\mor{(X\times _{Y}X,X)}$.
+            Therefore the fiber product must exist,
+            where the morphism in between is an isomorphism.
+    	\item When $X\times _{Y}X$ exists, then any $A$ letting the diagram below commute
+    		$$
+    		\begin{tikzcd}
+    A \arrow[rdd] \arrow[rrd] \arrow[rd, "\exists!" description, dotted] &                                &                    \\
+                                                         & X\times_YX \arrow[d] \arrow[r] & X \arrow[d, "\pi"] \\
+                                                         & X \arrow[r, "\pi"']            & Y                 
+    	\end{tikzcd}
+    	,$$ 
+    	whose morphism to $X\times _{Y}X$ will factor through $X\times _{Y}X$ uniquely. Therefore any two map:
+    	$$
+    	\alpha,\ \beta:A\longrightarrow X
+    	$$ 
+    	can be factorized into
+    	$$
+    	\alpha= \alpha'\circ p,\ \beta=\beta'\circ p
+    	$$ 
+    	Where $p:A\longrightarrow X\times _{Y}X$ and $\alpha',\ \beta':X\times_{Y}X\longrightarrow X$. \\
+    	$$
+    	\begin{tikzcd}
+    A \arrow[rdd, "\alpha"'] \arrow[rrd, "\beta"] \arrow[rd, "p" description, dotted] &                                                      &                    \\
+                                                                                      & X\times_YX \arrow[d, "\alpha'"'] \arrow[r, "\beta'"] & X \arrow[d, "\pi"] \\
+                                                                                      & X \arrow[r, "\pi"']                                  & Y                 
+    \end{tikzcd}
+    $$ 
+    So if
+    $$
+    \pi\circ \alpha=\pi\circ \beta
+    $$ 
+    We'll have
+    $$
+    \pi\circ \alpha'\circ p=\pi\circ \beta'\circ p
+    $$ 
+    By the definiiton of diagonal morhphism we know $\alpha'=\beta'$, therefore $\alpha'\circ p=\beta'\circ p$, i.e. $\alpha=\beta$.
+    $\pi$ satisfy the left cancellation law, so it's a monomorphism.
+	\end{itemize}
 \end{exercise}
 
 \begin{exercise}
@@ -547,22 +541,22 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
 	\end{tikzcd}
 	$$ 
 	\begin{enumerate}
-		\item We simply let $i_{C}$ correspond to the morphism $A\longrightarrow A'$ and verify the properties stated in the problems. Also, uniqueness can be obtianed by letting $C=A$.
+		\item We simply let $\id_{C}$ correspond to the morphism $A\longrightarrow A'$ and verify the properties stated in the problems. Also, uniqueness can be obtianed by letting $C=A$.
 		\item We follow from the hint: Let $C=A'$ and we get a bijection
 			$$
-			i_{A'}:(\mathrm{Mor}(A',A))\longrightarrow (\mathrm{Mor}(A',A'))
+			\id_{A'}:(\mathrm{Mor}(A',A))\longrightarrow (\mathrm{Mor}(A',A'))
 			$$ 
-			We pick out $h$ from $\mathrm{Mor(A',A)}$ such that $i_{A'}(h)=\mathrm{id}_{A'}$. From \textbf{(a)} we know $i_{A'}$ can be represented using $g$ :
+			We pick out $h$ from $\mathrm{Mor(A',A)}$ such that $\id_{A'}(h)=\id_{A'}$. From \textbf{(a)} we know $\id_{A'}$ can be represented using $g$ :
 			$$
-			\mathrm{id}_{A'}=i_{A'}(h)=g\circ h
+			\id_{A'}=\id_{A'}(h)=g\circ h
 			$$ 
-			On the other hand, we prove $i_{A}^{-1}$ can be induced by $h$ using the similar method to \textbf{(a)}.
+			On the other hand, we prove $\id_{A}^{-1}$ can be induced by $h$ using the similar method to \textbf{(a)}.
 			$$
-			\exists !\ \mathrm{id}_{A}\in \mathrm{Moe(A,A)},\ i_{A}(id_{A})=g\in \mathrm{Mor}(A,A')
+            \exists !\ \id_{A}\in \mor{(A,A)},\ \id_{A}(\id_{A})=g\in \mor{(A,A)}
 			$$ 
 			And we can see
 			$$
-			\mathrm{id}_{A}=i^{-1}(g)=h\circ g
+			\id_{A}=\id^{-1}(g)=h\circ g
 			$$ 
 			\qed
 	\end{enumerate}
@@ -627,7 +621,7 @@ A_j \arrow[r]                       & A_k
 	$$
 	F(m)(a_{j})=a_{k}
 	$$ 
-	So $(a_{i})_{i\in \mathscr{I}}A\longrightarrow A_{j}\longrightarrow A_{k}$ is commutative with $(a_{i})_{i\in \mathscr{I}}\longrightarrow A_{k}$.
+	So $(a_{i})_{i\in \mathscr{I}}A\longrightarrow A_{j}\longrightarrow A_{k}$ commutes with $(a_{i})_{i\in \mathscr{I}}\longrightarrow A_{k}$.
 	\qed
 \end{exercise}
 
@@ -644,7 +638,7 @@ A_j \arrow[r]                       & A_k
 \end{exercise}
 
 \begin{exercise}
-	\emph{(I suppose it's trivial, skipped.)}
+    \emph{(Trivial, skipped.)}
 \end{exercise}
 
 \begin{exercise}
@@ -652,7 +646,24 @@ A_j \arrow[r]                       & A_k
 \end{exercise}
 
 \begin{exercise}
-	
+    \emph{(Trivial, skipped.)}
+    $$
+        \begin{tikzcd}
+        \colim_{i\in\mathscr{I}}{M_i} &                          \\
+        M_i \arrow[u]                 & M_j \arrow[lu] \arrow[l]
+        \end{tikzcd}
+    $$
+\end{exercise}
+
+\section{Adjoints}
+\begin{exercise}
+    $$
+        \begin{tikzcd}
+        {\mor_{\mathscr{B}}(F(A),B)} \arrow[r, "g^*"] \arrow[d, "\tau_{\mathcal{AB}}"] & {\mor_{\mathscr{B}}(F(A),B')} \arrow[d, "\tau_{\mathcal{AB'}}"] \\
+        {\mor_{\mathscr{A}}(A,G(B))} \arrow[r, "Gg^*"]                                 & {\mor_{\mathscr{A}}(A,G(B'))}                                  
+        \end{tikzcd}
+    $$
+    
 \end{exercise}
 
 \end{document}
