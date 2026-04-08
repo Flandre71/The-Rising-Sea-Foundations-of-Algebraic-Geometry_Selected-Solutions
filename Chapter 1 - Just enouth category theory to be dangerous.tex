@@ -31,6 +31,8 @@
 \DeclareMathOperator{\id}{Id}
 \DeclareMathOperator{\mor}{Mor}
 \DeclareMathOperator{\colim}{Colim}
+\let\hom\relax
+\DeclareMathOperator{\hom}{Hom}
 \renewcommand{\theexercise}{\currchapter.\thesection.\Alph{exercise}}
 \title{Chapter 1 - Just enough category theory to be dangerous}
 \author{Flandre}
@@ -663,7 +665,51 @@ A_j \arrow[r]                       & A_k
         {\mor_{\mathscr{A}}(A,G(B))} \arrow[r, "Gg^*"]                                 & {\mor_{\mathscr{A}}(A,G(B'))}                                  
         \end{tikzcd}
     $$
-    
+\end{exercise}
+
+\begin{exercise}
+    \textbf{(FAILED)}
+\end{exercise}
+
+\begin{exercise}
+    $$
+\begin{tikzcd}
+M\times N \arrow[rrr, "{\hom_{A}{(\hom_{A}{(N,P)})}}"] \arrow[dd] &  &  & P \\
+                                                                  &  &  &   \\
+M\otimes N \arrow[rrruu, "{\hom_{A}{(M\otimes _{A}N,P)}}"']       &  &  &  
+\end{tikzcd}
+    $$
+    For any $A$-bilinear map $M\times N\longrightarrow P$,
+    we can operate this map by picking $M,N$ respectively,
+    which is equivalent to having $\hom_{A}{(\hom_{A}{(N,P)})}$.
+    Therefore, such bilinear map factors uniquely through $\hom_{A}{(\hom_{A}{(N,P)})}$.
+    And by the universal property of tensor product,
+    $$
+    \hom_{A}{(M\otimes _{A}N,P)}\cong\hom_{A}{(\hom_{A}{(N,P)})}
+    $$
+    \qed
+\end{exercise}
+
+\begin{exercise}
+    Define $F,G$ to be the functor $(\cdot)\otimes _{A}N,\hom_{A}(N,\cdot)$ respectively.
+    We need to prove those $\tau_{XY}$ are natual,
+    i.e. for $\forall \varphi:M\longrightarrow M',\psi:P\longrightarrow P'$
+    $$
+    \begin{tikzcd}
+    {\hom_{A}{(M'\otimes_{A}N,P)}} \arrow[r, "F\varphi^{*}"] \arrow[d, "\tau_{M'P}"] & {\hom_{A}{(M\otimes_{A}N,P)}} \arrow[d, "\tau_{MP}"] \\
+    {\hom_{A}{(M',\hom_{A}{(N,P)})}} \arrow[r, "\varphi^{*}"]                        & {\hom_{A}{(M,\hom_{A}{(N,P)})}}                    
+    \end{tikzcd}
+    $$
+    and
+    $$
+    \begin{tikzcd}
+    {\hom_{A}{(M\otimes_{A}N,P)}} \arrow[r, "\psi^{*}"] \arrow[d, "\tau_{MP}"] & {\hom_{A}{(M\otimes_{A}N,P')}} \arrow[d, "\tau_{MP'}"] \\
+    {\hom_{A}{(M,\hom_{A}{(N,P)})}} \arrow[r, "G\psi^{*}"]                     & {\hom_{A}{(M,\hom_{A}{(N,P')})}}                     
+    \end{tikzcd}
+    $$
+    commutes.
+    This is obvious when we consider the proeprty of homomorphisms.
+    \qed
 \end{exercise}
 
 \end{document}
