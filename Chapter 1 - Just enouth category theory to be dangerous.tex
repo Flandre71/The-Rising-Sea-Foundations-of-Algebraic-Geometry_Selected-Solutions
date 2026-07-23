@@ -6,37 +6,42 @@
 \usepackage{amsmath, amssymb}
 \usepackage{amsthm}
 \usepackage{enumitem}
-\usepackage{mathrsfs}
 \usepackage{tikz-cd}
+\usepackage{mathrsfs}
 
-\setlist[enumerate,1]{
-    label=(\alph*), 
-    topsep=0pt, 
-    partopsep=0pt, 
-    parsep=0pt,
-    leftmargin=*
-}
-\newcommand{\currchapter}{1}
 \newtheoremstyle{breakstyle}
-	{5pt}
-	{10pt}
-	{\normalfont}
-	{0pt}
-	{\bfseries}
-	{}
-	{\newline}
-	{}
+    {5pt}
+    {10pt}
+    {\normalfont}
+    {0pt}
+    {\bfseries}
+    {\newline\indent}
+    {0pt}
+    {\thmname{#1}\thmnumber{ #2}\thmnote{ \textbf{[#3]}}}
 \theoremstyle{breakstyle}
 \newtheorem{exercise}{Exercise}[section]
+\renewcommand{\theexercise}{\thesection.\Alph{exercise}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{lemma}{Lemma}[section]
+
 \DeclareMathOperator{\id}{Id}
 \DeclareMathOperator{\mor}{Mor}
 \DeclareMathOperator{\colim}{Colim}
 \let\hom\relax
 \DeclareMathOperator{\hom}{Hom}
-\renewcommand{\theexercise}{\currchapter.\thesection.\Alph{exercise}}
+\let\gcd\relax
+\DeclareMathOperator{\gcd}{Gcd}
+\let\mod\relax
+\DeclareMathOperator{\mod}{Mod}
+\DeclareMathOperator{\pr}{pr}
+
 \title{Chapter 1 - Just enough category theory to be dangerous}
 \author{Flandre}
-\date{29 Dec 2025}
+\date{\today}
 
 \begin{document}
 \maketitle
@@ -44,42 +49,57 @@
 \section{Categories and functors}
 \begin{exercise}
 	\leavevmode \vspace{-\baselineskip}
-		\begin{enumerate}
-			\item Since there's only one object, namely $e$, in the category, all the morphisms in such category will send $e$ to $e$.
-				\begin{itemize}
-					\item The combinations of morphisms are always associative.
-					\item There must exist an identity morphism, which'll be the identity in the group.
-					\item Since it's a groupoid, every morphism has a inverse.
-				\end{itemize}
-				\emph{ (In fact every group can be represented using the language of vategory. Consider Cayley's Theorem and we ca see every group element can be regarded as an automorphism, satisfying the case of morphism to a object itself.) }
-			\item We consider a category $\mathscr{C}$ whose objects are $A,B$. Consider
-				$$
-				\mathrm{Mor}(\mathscr{C})=\{\id_{A},\id_{B}\}
-				.$$ 
-				and we can see that it's a groupiod where the elements corresponding to $\id_{A},\id_{B}$ cannot have multiplication
-                , therefore not a group.
-		\end{enumerate}
+	\begin{enumerate}
+        \item Since there's only one object, namely $e$, in the category, all
+            the morphisms in such category will send $e$ to $e$.
+			\begin{itemize}
+                \item The combinations of morphisms are always associative.
+                \item There must exist an identity morphism, which'll be the
+                    identity in the group.
+				\item Since it's a groupoid, every morphism has a inverse.
+			\end{itemize}
+            \emph{ (In fact every group can be represented using the language of
+            vategory. Consider Cayley's Theorem and we ca see every group
+            element can be regarded as an automorphism, satisfying the case of
+            morphism to a object itself.) }
+        \item We consider a category $\mathscr{C}$ whose objects are $A,B$.
+            Consider
+			$$
+			\mor(\mathscr{C})=\{\id_{A},\id_{B}\}
+			.$$ 
+            and we can see that it's a groupiod where the elements
+            corresponding to $\id_{A},\id_{B}$ cannot have multiplication ,
+            therefore not a group.
+	\end{enumerate}
 \end{exercise}
 
 \begin{exercise}
 	\leavevmode \vspace{-\baselineskip}
 		\begin{enumerate}
-			\item Similar to the case in \textbf{1.1.A}, we can use exactly the same proof to show that invertible elements of $\mathrm{Mor}(A,A)$ forms a group.
-			\item Automorphism groups of objects in \textbf{Example 1.1.2} are those permutation groups permutating the elements in a group.
-			\item Automorphism groups of objects in \textbf{Example 1.1.3} are those invertible linear transformations mapping a linear space to itself.
+            \item Similar to the case in \textbf{1.1.A}, we can use exactly the
+                same proof to show that invertible elements of
+                $\mor(A,A)$ forms a group.
+            \item Automorphism groups of objects in \textbf{Example 1.1.2} are
+                those permutation groups permutating the elements in a group.
+            \item Automorphism groups of objects in \textbf{Example 1.1.3} are
+                those invertible linear transformations mapping a linear space
+                to itself.
 		\end{enumerate}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}[Skipped, require \textbf{1.1.21} to solve.]
 	\leavevmode \vspace{-\baselineskip}
-		\begin{enumerate}
-			\item In the case of finite cases, the set of bases of $Vec_{k},Vec_{k}^{\vee}$ is finite. Therefore the functor $(\cdot)^{\vee}$ must be isomorphism.
-		\end{enumerate}
-	\emph{skipped (require \textbf{1.1.21} to solve.)}
+    \begin{enumerate}[label=({\roman*})]
+        \item In the case of finite cases, the set of bases of
+            $Vec_{k},Vec_{k}^{\vee}$ is finite. Therefore the functor
+            $(\cdot)^{\vee}$ must be isomorphism.
+	\end{enumerate}
 \end{exercise}
 
 \begin{exercise}
-	Since it's finite, just find out the bases and we can define a trivial isomorphism between $\mathscr{V}$ and $f.d.Vec_{k}$ by mapping those bases respectively.
+    Since it's finite, just find out the bases and we can define a trivial
+    isomorphism between $\mathscr{V}$ and $f.d.Vec_{k}$ by mapping those bases
+    respectively.
 \end{exercise}
 
 \section{Universal properties determine an object up to unique isomorphism}
@@ -94,7 +114,9 @@
 			$$
 			\varphi \circ \psi :B\mapsto B,\psi\circ\varphi:A\mapsto A
 			.$$ 
-			Also, notice since $A,B$ are initial objects, they have only one unique map to every objects in the category, including themselves. And $Id_{A},Id_{B}$ maps $A,B$ to themselves. Hence we obtain
+            Also, notice since $A,B$ are initial objects, they have only one
+            unique map to every objects in the category, including themselves.
+            And $Id_{A},Id_{B}$ maps $A,B$ to themselves. Hence we obtain
 			\begin{align*}
 				& Id_{A}=\psi\circ\varphi \\
 				& Id_{B}=\psi\circ\varphi
@@ -108,8 +130,10 @@
 \begin{exercise}
 	\leavevmode \vspace{-\baselineskip}
 	\begin{enumerate}
-		\item In the category of sets, the initial and final object is $\emptyset$ and the class of all sets, respectively.
-		\item In the category of rings, the initial and final object is the zero ring and the class of all rings, respectively.
+        \item In the category of sets, the initial and final object is
+            $\emptyset$ and the class of all sets, respectively.
+        \item In the category of rings, the initial and final object is the zero
+            ring and the class of all rings, respectively.
 		\item \emph{Skipped (haven't learn topology yet).}
 	\end{enumerate}
 \end{exercise}
@@ -117,16 +141,23 @@
 \begin{exercise}
 	\leavevmode \vspace{-\baselineskip}
 	\begin{itemize}
-		\item $(\Leftarrow)$: When $S$ contains no zerodivisors, we prove by contradiction: Assume that under the canonical ring map  $\varphi:A\mapsto S^{-1}A$, there exist $a_{1},a_{2}\in A,\ s.t.\varphi(a_{1})=\varphi(a_{2})$. Now we have $a_{1}/1 = a_{2}/1$, which means
+        \item $(\Leftarrow)$: When $S$ contains no zerodivisors, we prove by
+            contradiction: Assume that under the canonical ring map
+            $\varphi:A\mapsto S^{-1}A$, there exist $a_{1},a_{2}\in A,\
+            s.t.\varphi(a_{1})=\varphi(a_{2})$. Now we have $a_{1}/1 = a_{2}/1$,
+            which means
 			$$
 			\exists s \in S, s.t.\ s(a_{1}-a_{2})=0
 			.$$ 
 			Which contradicts with the fact that $S$ has no zerodivisors!
-		\item $(\Rightarrow)$: When $\varphi:A \mapsto  S^{-1}A$ is injective, we assume $S$ contains a zerodivisors $s$ at which
+        \item $(\Rightarrow)$: When $\varphi:A \mapsto  S^{-1}A$ is injective,
+            we assume $S$ contains a zerodivisors $s$ at which
 			$$
 			\exists d\in A,\ s.t.\ d\neq 0,\ s\cdot d=0
 			.$$ 
-			Now let $a_{1},a_{2}\in A,\ s.t.\ a_{1}-a_{2}=d$. Since $\varphi$ is injective,  we must have $\varphi(a_{1})\neq \varphi(a_{2})$. Which contradicts with the fact that
+            Now let $a_{1},a_{2}\in A,\ s.t.\ a_{1}-a_{2}=d$. Since $\varphi$ is
+            injective,  we must have $\varphi(a_{1})\neq \varphi(a_{2})$. Which
+            contradicts with the fact that
 			$$
 			s(a_{1}-a_{2})=s\cdot d = 0
 			.$$ 
@@ -140,14 +171,17 @@
 		& f:A\mapsto B\\
 		& \varphi :A\mapsto S^{-1}A
 	.\end{align*}
-	By the first translation in by author, we have to prove that there an unique ring homomorphism $\psi$ mapping $S^{-1}A$ to $B$. Recall that $\forall a \in A, f(a)=\varphi(a / 1)$. Also, for all $a\in A,s \in S$,
+    By the first translation in by author, we have to prove that there an unique
+    ring homomorphism $\psi$ mapping $S^{-1}A$ to $B$. Recall that $\forall a
+    \in A, f(a)=\varphi(a / 1)$. Also, for all $a\in A,s \in S$,
 	$$
 	\frac{a}{s}\cdot \frac{s}{1}= \frac{a}{1}
 	.$$ 
 	So
 	\begin{align*}
 		& \psi( \frac{a}{s} )\cdot \psi( \frac{s}{1} ) = \psi( \frac{a}{1} )\\
-		& \psi( \frac{a}{s} )= \psi( \frac{a}{1} )\cdot \psi( \frac{s}{1} )^{-1} \\
+        & \psi( \frac{a}{s} )= \psi( \frac{a}{1} )\cdot \psi( \frac{s}{1} )^{-1}
+        \\
 	.\end{align*}
 	And we can see $\psi( \frac{a}{s} )$ is uniquely defined!
 	\qed
@@ -158,29 +192,36 @@
 	$$
 	S^{-1}M= \left\{ \frac{m}{s}\mid m \in M,s \in S \right\} 
 	.$$ 
-	And $S^{-1}M$ meet the requirement to become a module by: $\forall m_{1},m_{2}\in M,s_{1},s_{2}\in S:$
+    And $S^{-1}M$ meet the requirement to become a module by: $\forall
+    m_{1},m_{2}\in M,s_{1},s_{2}\in S:$
 	$$
 	\frac{m_{1}}{s_{1}} = \frac{m_{2}}{s_{2}} \iff \exists s \in S,\ s \left( s_{2}m_{1}-s_{1}m_{2} \right) =0\\
 	.$$ 
 	$$
-	\frac{m_{1}}{s_{1}} + \frac{m_{2}}{s_{2}} = \frac{m_{1}s_{2}+m_{2}s_{1}}{s_{1}s_{2}}
+    \frac{m_{1}}{s_{1}} + \frac{m_{2}}{s_{2}}
+     = \frac{m_{1}s_{2}+m_{2}s_{1}}{s_{1}s_{2}}
 	.$$ 
 	And the $S^{-1}A$ module structure
 	$$
-	\forall a \in A,s_{1},s_{2}\in S,m\in M,\ \frac{a}{s_{1}}\cdot \frac{m}{s_{2}} = \frac{am}{s_{1}s_{2}}
+    \forall a \in A,s_{1},s_{2}\in S,m\in M,\ \frac{a}{s_{1}}\cdot
+    \frac{m}{s_{2}} = \frac{am}{s_{1}s_{2}}
 	.$$ 
 	Also, we define $M\Rightarrow S^{-1}M$ by
 	$$
 	m \longrightarrow \frac{m}{1}
 	.$$ 
-	Now for any $A$-module maps $M\rightarrow N$, we'll prove $\phi$ satisfies the universal proterty, i.e. the map $S^{-1}M\longrightarrow N$, we denote it by $\varphi$, is unique: $\forall \frac{m}{s}\in S^{-1}M$, notice:
+    Now for any $A$-module maps $M\rightarrow N$, we'll prove $\phi$ satisfies
+    the universal proterty, i.e. the map $S^{-1}M\longrightarrow N$, we denote
+    it by $\varphi$, is unique: $\forall \frac{m}{s}\in S^{-1}M$, notice:
 	$$
 	\begin{cases}
 		\alpha(m) \in N \\
 		\alpha(s)^{-1} \in N
 	\end{cases}
 	.$$ 
-	Therefore we have $\varphi( \frac{m}{s} ) = \alpha(m) \alpha(s)^{-1}$. So the $\phi$ in the problem satisfy the uniqueness of universal property, so it exist.
+    Therefore we have $\varphi( \frac{m}{s} ) = \alpha(m) \alpha(s)^{-1}$. So
+    the $\phi$ in the problem satisfy the uniqueness of universal property, so
+    it exist.
 	\qed
 \end{exercise}
 
@@ -189,66 +230,61 @@
 	\begin{enumerate}
 		\item Intuitively, we can let
 			$$
-			\frac{(m_{1},m_{2},\ldots ,m_{n})}{s} \longrightarrow \left( \frac{m_{1}}{s},\ \frac{m_{2}}{s},\ \ldots,\ \frac{m_{n}}{s} \right) 
+            \frac{(m_{1},m_{2},\ldots ,m_{n})}{s} \longrightarrow \left(
+            \frac{m_{1}}{s},\ \frac{m_{2}}{s},\ \ldots,\ \frac{m_{n}}{s} \right) 
 			.$$ 
-			On the other hand, inductively we only have to consider the case $n=2$, and we let
+            On the other hand, inductively we only have to consider the case
+            $n=2$, and we let
 			$$
-			\left( \frac{m_{1}}{s_{1}},\ \frac{m_{2}}{s_{2}} \right) \longrightarrow \left( \frac{m_{1}s_{2}}{s_{1}s_{2}},\ \frac{m_{2}s_{1}}{s_{1}s_{2}} \right) 
+            \left( \frac{m_{1}}{s_{1}},\ \frac{m_{2}}{s_{2}} \right)
+            \longrightarrow \left( \frac{m_{1}s_{2}}{s_{1}s_{2}},\
+            \frac{m_{2}s_{1}}{s_{1}s_{2}} \right) 
 			.$$ 
 			And we're done after induction.
-		\item Notice that in the case of direct sum, all but finitely many coordinates is zero. Therefore the proof is exactly the same as the case in \emph{(a)}.
-		\item Counterexample: consider group of modules $\{M_{n}\}_{n=1}^{\infty}$, and set of prime numbers $P=\{p_{n}\}_{n=1}^{\infty}$. We consider fraction of $\{M_{n}\}_{n=1}^{\infty}$ by positive integers, we cannot map ${\frac{m_1}{p_1},\frac{m_2}{p_2},...}$ to a proper element in $S^{-1}\left( \bigotimes _{k \in I}M_{k} \right) $ since $p_{1},\ p_{2},\ \ldots$ cannot have a shared denominator.
+        \item Notice that in the case of direct sum, all but finitely many
+            coordinates is zero. Therefore the proof is exactly the same as the
+            case in \emph{(a)}.
+        \item Counterexample: consider group of modules
+            $\{M_{n}\}_{n=1}^{\infty}$, and set of prime numbers
+            $P=\{p_{n}\}_{n=1}^{\infty}$. We consider fraction of
+            $\{M_{n}\}_{n=1}^{\infty}$ by positive integers, we cannot map
+            ${\frac{m_1}{p_1},\frac{m_2}{p_2},...}$ to a proper element in
+            $S^{-1}\left( \bigotimes _{k \in I}M_{k} \right) $ since $p_{1},\
+            p_{2},\ \ldots$ cannot have a shared denominator.
 	\end{enumerate}
 \end{exercise}
 
 \begin{exercise}
 	More generally, we'll prove that
 	$$
-	\forall m,\ n \in \mathbb{Z}^{+},\ \mathbb{Z} / (m) \otimes_{\mathbb{Z}}\mathbb{Z} \ (n) \cong \mathbb{Z} / (\mathrm{gcd}(m,n))
+    \forall m,\ n \in \mathbb{Z}^{+},\ \mathbb{Z} / (m)
+    \otimes_{\mathbb{Z}}\mathbb{Z} \ (n) \cong \mathbb{Z} / (\gcd(m,n))
 	.$$ 
-	First, we know $\mathbb{Z} / (m) \otimes_{\mathbb{Z}}\mathbb{Z} \ (n)$ was generated by $1_{\mathbb{Z} / (m)} \otimes 1_{\mathbb{Z} / (n)}$. So means that every elements of $\mathbb{Z} / (m) \otimes_{\mathbb{Z}}\mathbb{Z} \ (n) $ can be written in the form of $k\cdot (1_{\mathbb{Z} / (m)} \otimes 1_{\mathbb{Z} / (n)}),\ k \in \mathbb{Z}^{+}$. Also, $\forall i,\ j \in \mathbb{Z}^{+}$,
-	$$
-	k\cdot (1_{\mathbb{Z} / (m)} \otimes 1_{\mathbb{Z} / (n)}) = (mi+nj)\cdot k\cdot (1_{\mathbb{Z} / (m)} \otimes 1_{\mathbb{Z} / (n)})
+    First, we know $\mathbb{Z} / (m) \otimes_{\mathbb{Z}}\mathbb{Z} \ (n)$ is
+    generated by $1_{\mathbb{Z} / (m)} \otimes 1_{\mathbb{Z} / (n)}$. Which means
+    that every elements of $\mathbb{Z} / (m) \otimes_{\mathbb{Z}}\mathbb{Z} \
+    (n) $ can be written in the form of $k\cdot (1_{\mathbb{Z} / (m)} \otimes
+    1_{\mathbb{Z} / (n)}),\ k \in \mathbb{Z}^{+}$. Also, $\forall i,\ j \in
+    \mathbb{Z}^{+}$
+	,$$
+    k\cdot (1_{\mathbb{Z} / (m)} \otimes 1_{\mathbb{Z} / (n)}) = (mi+nj)\cdot
+    k\cdot (1_{\mathbb{Z} / (m)} \otimes 1_{\mathbb{Z} / (n)})
 	.$$ 
 	And the proof can be done by Euclidean algorithm.
 	\qed
 \end{exercise}
 
-\begin{exercise}
-	\leavevmode \vspace{-\baselineskip}
-	\begin{enumerate}
-		\item Denote such mapping by $\mathcal{F}$, we'll prove $\mathcal{F}$ is a covariant functor.
-			We know $$
-			\mathcal{F}:M\longrightarrow \mathcal{F}(M)
-			.$$ 
-			And for morphism $m:M\longrightarrow m(M)$, we have
-			$$
-			\mathcal{F}(m):M\otimes N \longrightarrow m(M) \otimes N
-			.$$ 
-			We need to prove that $\mathcal{F}(\mathrm{id}_{M})=\mathrm{id}_{\mathcal{F}(M)}$ and $ \mathcal{F}(g\circ f)=\mathcal{F}(g)\circ \mathcal{F}(f)$. \\
-			First,
-			$$
-			\mathcal{F}(\mathrm{id}_{M}):M\otimes N \longrightarrow \mathrm{id}_{M}(M)\otimes N = M\otimes N
-			.$$ 
-			Also,
-			$$
-			 \mathcal{F}(g\circ f):M\otimes N \longrightarrow g\circ f (M)\otimes N
-			.$$ 
-			$$
-			\mathcal{F}(g)\circ \mathcal{F}(f):M\otimes N \longrightarrow \mathcal{F}(g) \left( f(M)\otimes N \right) =g\circ f (M)\otimes N
-			.$$ 
-			\qed
-		\item \emph{(The proof can be obtianed by checking the mapping property step by step, skipped)}
-	\end{enumerate}
+\begin{exercise}[Proved in \emph{Atiyah}]
+\end{exercise}
+
+\begin{exercise}[Trivial]
+    Because from the textbook content right above this question, we see any two
+    maps $T,\ T'$ has a unique $A$-linear map to each other.
 \end{exercise}
 
 \begin{exercise}
-	\emph{(Trivial.)}\\
-	Because from the textbook content right above this question, we see any two maps $T,\ T'$ has a unique $A$-linear map to each other.
-\end{exercise}
-
-\begin{exercise}
-	Because the construction in \S\emph{1.2.5} is a bilinear map, is unique up to isomorphism.
+    Because the construction in \S\emph{1.2.5} is a bilinear map, is unique up
+    to isomorphism.
 \end{exercise}
 
 \begin{exercise}
@@ -258,24 +294,29 @@
 			\begin{itemize}
 				\item $\forall b_{1},\ b_{2}\in B,\ b\otimes_{A}m\in B\otimes M$, we have
 					\begin{align*}
-						(b_{1}+b_{2})(b\otimes_{A}m)&=(b_{1}+b_{2})b\otimes_{A}m\\
-										&=(b_{1}b+b_{2}b)\otimes_{A}m\\
-										&=b_{1}b\otimes_{A}m+b_{2}b\otimes_{A}m\\
-										&=b(b_{1}\otimes_{A}m)+b(b_{2}\otimes_{A}m)
+                        (b_{1}+b_{2})(b\otimes_{A}m)
+                        &=(b_{1}+b_{2})b\otimes_{A}m\\
+                        &=(b_{1}b+b_{2}b)\otimes_{A}m\\
+                        &=b_{1}b\otimes_{A}m+b_{2}b\otimes_{A}m\\
+                        &=b(b_{1}\otimes_{A}m)+b(b_{2}\otimes_{A}m)
 					.\end{align*}
 					\begin{align*}
-						(b_{1}b_{2})(b\otimes_{A}m)&=(b_{1}b_{2}b)\otimes_{A}m\\
-							     &=b_{1}(b_{2}(b\otimes_{A}m))
+                        (b_{1}b_{2})(b\otimes_{A}m)
+                        &=(b_{1}b_{2}b)\otimes_{A}m\\
+                        &=b_{1}(b_{2}(b\otimes_{A}m))
 					.\end{align*}
-					\begin{align*}
-						b(b_{1}\otimes_{A}m+b_{2}\otimes_{A}m)&=b(b_{1}\otimes_{A}m)+b(b_{2}\otimes_{A}m)
-					.\end{align*}
-					% Which means that $B\otimes_{A}M$ meets the requirement to be a $B$-module.
-				\item Denote such map by $\mathcal{F}$. We see for ring $A$ and $B\otimes_{A}M\in \mathrm{Mod}_{B}$,
+                    $$
+                        b(b_{1}\otimes_{A}m+b_{2}\otimes_{A}m)
+                        =b(b_{1}\otimes_{A}m)+b(b_{2}\otimes_{A}m)
+					.$$
+                    % Which means that $B\otimes_{A}M$ meets the requirement to
+                    % be a $B$-module.
+				\item Denote such map by $\mathcal{F}$. We see for ring $A$ and
+                    $B\otimes_{A}M\in \mod_{B}$,
 					$$
 					 \mathcal{F}: A\longmapsto B\otimes_{A}M
 					.$$ 
-					And for $\varphi \in \mathrm{Mor}(A),\ \varphi: A\mapsto A'$,
+					And for $\varphi \in \mor(A),\ \varphi: A\mapsto A'$,
 					$$
 					\mathcal{F}(\varphi):B\otimes_{A}M\longmapsto B\otimes_{A'}M
 					.$$ 
@@ -297,28 +338,32 @@
 	$$
 	(\frac{a}{s})\otimes m\longmapsto \frac{am}{s}
 	.$$ 
-	And we can easily check that it meets the requirement to become a isomorphism.
+    And we can easily check that it meets the requirement to become a
+    isomorphism.
 \end{exercise}
 
 \begin{exercise}
-	Because $I$ only has finite nonzero elements, so the properties of tensor product can be verified easily.
+    Because $I$ only has finite nonzero elements, so the properties of tensor
+    product can be verified easily.
 \end{exercise}
 
 \begin{exercise}
 	It's because
 	$$
-	\alpha\circ\mathrm{pr}_{X} = \beta\circ\mathrm{pr}_{Y}
+	\alpha\circ\pr_{X} = \beta\circ\pr_{Y}
 	.$$ 
 \end{exercise}
 
 \begin{exercise}
-	\emph{(Skipped temporarily, haven't learnt topology yet.)}
+    Intersection.
+
+    Becuase morphisms are inclusion embeddings.
 \end{exercise}
 
 \begin{exercise}
 	Denote the natural maps
 	$$
-	\mathrm{pr}_{X}:X\times Y\longrightarrow X
+	\pr_{X}:X\times Y\longrightarrow X
 	.$$ 
 	$$
 	pr_{Y}:X\times Y\longrightarrow Y
@@ -332,24 +377,26 @@
 	.$$ 
 	Now we have to prove
 	$$
-	\alpha\circ\mathrm{pr}_{X}=\beta\circ\mathrm{pr}_{Y}
+	\alpha\circ\pr_{X}=\beta\circ\pr_{Y}
 	.$$ 
-	Which do work since $Z$ is a final diagram, from which we know, up to isomorphisms, it only has a single morphism sending $X\times Y$ to $Z$.
+    Which do work since $Z$ is a final diagram, from which we know, up to
+    isomorphisms, has only a single morphism sending $X\times Y$ to $Z$.
 \end{exercise}
 
 \begin{exercise}
 	For notations, let
 	$$
 	\begin{tikzcd}
-U \arrow[r, "f_1"] \arrow[d, "g_1"] & V \arrow[d, "h_1"] \\
-W \arrow[d, "g_2"] \arrow[r, "f_2"] & X \arrow[d, "h_2"] \\
-Y \arrow[r, "f_3"]                  & Z                 
-\end{tikzcd}
+        U \arrow[r, "f_1"] \arrow[d, "g_1"] & V \arrow[d, "h_1"] \\
+        W \arrow[d, "g_2"] \arrow[r, "f_2"] & X \arrow[d, "h_2"] \\
+        Y \arrow[r, "f_3"]                  & Z                 
+    \end{tikzcd}
 	.$$ 
 	And we can see
 	\begin{align*}
-		h_2\circ h_1\circ f_1&=h_2\circ f_2\circ g_1\\
-				     &=f_3\circ g_2\circ g_1
+		h_2\circ h_1\circ f_1
+        &=h_2\circ f_2\circ g_1\\
+		&=f_3\circ g_2\circ g_1
 	.\end{align*}
 	\qed
 \end{exercise}
@@ -357,24 +404,26 @@ Y \arrow[r, "f_3"]                  & Z
 \begin{exercise}
 	$$
 	\begin{tikzcd}
-X_1\times_Y X_2 \arrow[rdd] \arrow[rrd] \arrow[rd, "\exists!" description, dotted] &                                       &                                   &   \\
-                                                                                   & X_1\times_{Z} X_2 \arrow[d] \arrow[r] & X_2 \arrow[d] \arrow[rdd, dashed] &   \\
-                                                                                   & X_1 \arrow[r] \arrow[rrd, dashed]     & Y \arrow[rd]                      &   \\
-                                                                                   &                                       &                                   & Z
+        X_1\times_Y X_2 \arrow[rdd] \arrow[rrd] \arrow[rd, "\exists!" description, dotted] &                                       &                                   &   \\
+                                                                                           & X_1\times_{Z} X_2 \arrow[d] \arrow[r] & X_2 \arrow[d] \arrow[rdd, dashed] &   \\
+                                                                                           & X_1 \arrow[r] \arrow[rrd, dashed]     & Y \arrow[rd]                      &   \\
+                                                                                           &                                       &                                   & Z
 	\end{tikzcd}
 	.$$ 
 	Because from the problem we have the commutative diagram
 	$$
 	\begin{tikzcd}
-X_1\times_Y X_2 \arrow[d] \arrow[r] & X_2 \arrow[d, dashed] \\
-X_1 \arrow[r, dashed]               & Z                    
+        X_1\times_Y X_2 \arrow[d] \arrow[r] & X_2 \arrow[d, dashed] \\
+        X_1 \arrow[r, dashed]               & Z                    
 	\end{tikzcd}
 	.$$ 
-	And by the definition of fibered product, there must exist a unqiue factoring map $X_1\times_{Y}X_2\longrightarrow X_{1}\times _{Z}X_2$.
+    And by the definition of fibered product, there must exist a unqiue
+    factoring map $X_1\times_{Y}X_2\longrightarrow X_{1}\times _{Z}X_2$.
 \end{exercise}
 
 \begin{exercise}
-    \emph{(}$ Y\longrightarrow Y\times _{Z}Y $\emph{is defined by identical embedding)}
+    \emph{(}$ Y\longrightarrow Y\times _{Z}Y $\emph{is defined by identical
+    embedding)}
 	$$
 	\begin{tikzcd}
 X_1\times_Y X_2 \arrow[d] \arrow[r] & X_2 \arrow[d] &   \\
@@ -385,14 +434,14 @@ X_1 \arrow[r]                       & Y \arrow[rd]  &   \\
 	We need to prove the diagram below is a Cartesian Square:
 	$$
 	\begin{tikzcd}
-X_1\times_Y X_2 \arrow[d] \arrow[r] & X_1\times_Z X_2 \arrow[d] \\
-Y \arrow[r]                         & Y\times_Z Y              
+        X_1\times_Y X_2 \arrow[d] \arrow[r] & X_1\times_Z X_2 \arrow[d] \\
+        Y \arrow[r]                         & Y\times_Z Y              
 	\end{tikzcd}
 	$$ 
     Which becomes trivial when we notice
     $$
     \begin{tikzcd}
-    X_1\times_{Y}X_2 \arrow[rd, "\exists!" description, dotted] \arrow[rrd] \arrow[rdd] &                                                                                 &                                             &             \\
+        X_1\times_{Y}X_2 \arrow[rd, "\exists!" description, dotted] \arrow[rrd] \arrow[rdd] &                                                                                 &                                             &             \\
                                                                                         & X_1\times_{Z}X_2 \arrow[rd, "\exists!" description, dotted] \arrow[d] \arrow[r] & X_2 \arrow[rd]                              &             \\
                                                                                         & X_1 \arrow[rd]                                                                  & Y\times_{Z}Y \arrow[d] \arrow[r]            & Y \arrow[d] \\
                                                                                         &                                                                                 & Y \arrow[ru, Rightarrow,no head] \arrow[r] & Z          
@@ -422,7 +471,7 @@ S_1 \arrow[r, "\varphi_1"] \arrow[ru, "\psi_1"] & S_1\sqcup S_2 \arrow[u, dotted
 	$$
 	\Psi:(\cdot ,s_2)\longmapsto \psi_2(s_2)
 	.$$
-	Which is unique and make the diagram commutative.
+	Which is unique up to isomorphism while making the diagram commutes.
 \end{exercise}
 
 \begin{exercise}
@@ -430,7 +479,7 @@ S_1 \arrow[r, "\varphi_1"] \arrow[ru, "\psi_1"] & S_1\sqcup S_2 \arrow[u, dotted
 	$$
 	\begin{tikzcd}
 D &                                                       &                               \\
-  & B\times_AC \arrow[lu, "\varphi" description, dotted] & C \arrow[l] \arrow[llu, "h"'] \\
+  & B\otimes_AC \arrow[lu, "\varphi" description, dotted] & C \arrow[l] \arrow[llu, "h"'] \\
   & B \arrow[u] \arrow[luu, "g"]                          & A \arrow[l] \arrow[u]        
 	\end{tikzcd}
 	$$ 
@@ -446,8 +495,8 @@ D &                                                       &                     
 \begin{exercise}
 	$$
 	\begin{tikzcd}
-A \arrow[d, "\leq1" description, dotted] \arrow[rd, "\leq1" description, dotted] \arrow[rrd] &                       &   \\
-X \arrow[r, "\alpha"']                                                                       & Y \arrow[r, "\beta"'] & Z
+        A \arrow[d, "\leq1" description, dotted] \arrow[rd, "\leq1" description, dotted] \arrow[rrd] &                       &   \\
+        X \arrow[r, "\alpha"']                                                                       & Y \arrow[r, "\beta"'] & Z
 	\end{tikzcd}
 	$$ 
 	From the graph we obtian the proof easily.
@@ -465,18 +514,21 @@ X \arrow[r, "\alpha"']                                                          
                 X \arrow[r, "\pi"]               & Y                 
             \end{tikzcd}
             $$
-            From the definition of monomorphism, we know there's only one morphism in $\mor{(X\times _{Y}X,X)}$.
-            Therefore the fiber product must exist,
-            where the morphism in between is an isomorphism.
-    	\item When $X\times _{Y}X$ exists, then any $A$ letting the diagram below commute
+            From the definition of monomorphism, we know there's only one
+            morphism in $\mor{(X\times _{Y}X,X)}$ making the diagram commutes.
+            Therefore the fiber product must exist, where the morphism in
+            between is an isomorphism.
+        \item When $X\times _{Y}X$ exists, then any $A$ letting the diagram
+            below commute
     		$$
     		\begin{tikzcd}
     A \arrow[rdd] \arrow[rrd] \arrow[rd, "\exists!" description, dotted] &                                &                    \\
                                                          & X\times_YX \arrow[d] \arrow[r] & X \arrow[d, "\pi"] \\
                                                          & X \arrow[r, "\pi"']            & Y                 
-    	\end{tikzcd}
+    	    \end{tikzcd}
     	,$$ 
-    	whose morphism to $X\times _{Y}X$ will factor through $X\times _{Y}X$ uniquely. Therefore any two map:
+        whose morphism to $X\times _{Y}X$ will factor through $X\times _{Y}X$
+        uniquely. Therefore any two map:
     	$$
     	\alpha,\ \beta:A\longrightarrow X
     	$$ 
@@ -484,12 +536,13 @@ X \arrow[r, "\alpha"']                                                          
     	$$
     	\alpha= \alpha'\circ p,\ \beta=\beta'\circ p
     	$$ 
-    	Where $p:A\longrightarrow X\times _{Y}X$ and $\alpha',\ \beta':X\times_{Y}X\longrightarrow X$. \\
+        Where $p:A\longrightarrow X\times _{Y}X$ and $\alpha',\
+        \beta':X\times_{Y}X\longrightarrow X$. \\
     	$$
-    	\begin{tikzcd}
-    A \arrow[rdd, "\alpha"'] \arrow[rrd, "\beta"] \arrow[rd, "p" description, dotted] &                                                      &                    \\
-                                                                                      & X\times_YX \arrow[d, "\alpha'"'] \arrow[r, "\beta'"] & X \arrow[d, "\pi"] \\
-                                                                                      & X \arrow[r, "\pi"']                                  & Y                 
+    \begin{tikzcd}
+            A \arrow[rdd, "\alpha"'] \arrow[rrd, "\beta"] \arrow[rd, "p" description, dotted] &                                                      &                    \\
+                                                                                              & X\times_YX \arrow[d, "\alpha'"'] \arrow[r, "\beta'"] & X \arrow[d, "\pi"] \\
+                                                                                              & X \arrow[r, "\pi"']                                  & Y                 
     \end{tikzcd}
     $$ 
     So if
@@ -500,41 +553,45 @@ X \arrow[r, "\alpha"']                                                          
     $$
     \pi\circ \alpha'\circ p=\pi\circ \beta'\circ p
     $$ 
-    By the definiiton of diagonal morhphism we know $\alpha'=\beta'$, therefore $\alpha'\circ p=\beta'\circ p$, i.e. $\alpha=\beta$.
-    $\pi$ satisfy the left cancellation law, so it's a monomorphism.
+    By the definiton of diagonal morphism we know $\alpha'=\beta'$, therefore
+    $\alpha'\circ p=\beta'\circ p$, i.e. $\alpha=\beta$. $\pi$ satisfy the left
+    cancellation law, so it's a monomorphism.
 	\end{itemize}
 \end{exercise}
 
 \begin{exercise}
 	$$
 	\begin{tikzcd}
-X_1\times_YX_2 \arrow[rdd] \arrow[rrd] &                                    &               &   \\
-                                       & X_1\times_ZX_2 \arrow[d] \arrow[r] & X_2 \arrow[d] &   \\
-                                       & X_1 \arrow[r]                      & Y \arrow[rd]  &   \\
-                                       &                                    &               & Z
+        X_1\times_YX_2 \arrow[rdd] \arrow[rrd] &                                    &               &   \\
+                                               & X_1\times_ZX_2 \arrow[d] \arrow[r] & X_2 \arrow[d] &   \\
+                                               & X_1 \arrow[r]                      & Y \arrow[rd]  &   \\
+                                               &                                    &               & Z
 	\end{tikzcd}
 	$$ 
 	From Exercise \textbf{1.2.R} we know there exist a unique morphism
 	$$
 	\varphi:X_1\times_{Y}X_2\longrightarrow X_1\times _{Z}X_2
 	.$$ 
-	Now since $Y\longrightarrow Z$ is monomorphism, from the commutavity of $X_1\times _{Z}X_2\rightarrow X_1\rightarrow Y\rightarrow Z$ and $X_1\times _{Z}X_2\rightarrow X_2\rightarrow Y\rightarrow Z$ we can get the commutavity of
+    Now since $Y\longrightarrow Z$ is monomorphism, from the commutavity of
+    $X_1\times _{Z}X_2\rightarrow X_1\rightarrow Y\rightarrow Z$ and $X_1\times
+    _{Z}X_2\rightarrow X_2\rightarrow Y\rightarrow Z$ we can get the commutavity
+    of
 	$$
 	\begin{tikzcd}
 X_1\times_ZX_2 \arrow[d] \arrow[r] & X_2 \arrow[d] \\
 X_1 \arrow[r]                      & Y            
 	\end{tikzcd}
 	$$ 
-	And therefore there's a unique morphism $\psi:X_1\times _{Z}X_2\longrightarrow X_1\times _{Y}X_2$. 
-	By their uniqueness, we have
+    And therefore there's a unique morphism $\psi:X_1\times
+    _{Z}X_2\longrightarrow X_1\times _{Y}X_2$. By their uniqueness, we have
 	$$
 	\varphi\circ \psi\circ \varphi=\varphi,\ \psi\circ \varphi\circ \psi=\psi
 	$$ 
-	So $\varphi\circ \psi=\mathrm{id}_{X_1\times _{Z}X_2},\ \psi\circ \varphi=\mathrm{id}_{X_1\times _{Y}X_2}$.
+    So $\varphi\circ \psi=\id_{X_1\times _{Z}X_2},\ \psi\circ
+    \varphi=\id_{X_1\times _{Y}X_2}$.
 \end{exercise}
 
 \begin{exercise}
-	% \leavevmode \vspace{-\baselineskip}
 	$$
 	\begin{tikzcd}
 B \arrow[rrdd] \arrow[dd]                                                    &                                                                               & A' \arrow[lldd, "h"', bend right, shift right=3] \arrow[loop, distance=2em, in=125, out=55] \\
@@ -543,16 +600,21 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
 	\end{tikzcd}
 	$$ 
 	\begin{enumerate}
-		\item We simply let $\id_{C}$ correspond to the morphism $A\longrightarrow A'$ and verify the properties stated in the problems. Also, uniqueness can be obtianed by letting $C=A$.
+        \item We simply let $\id_{C}$ correspond to the morphism
+            $A\longrightarrow A'$ and verify the properties stated in the
+            problems. Also, uniqueness can be obtianed by letting $C=A$.
 		\item We follow from the hint: Let $C=A'$ and we get a bijection
 			$$
-			\id_{A'}:(\mathrm{Mor}(A',A))\longrightarrow (\mathrm{Mor}(A',A'))
+			\id_{A'}:(\mor(A',A))\longrightarrow (\mor(A',A'))
 			$$ 
-			We pick out $h$ from $\mathrm{Mor(A',A)}$ such that $\id_{A'}(h)=\id_{A'}$. From \textbf{(a)} we know $\id_{A'}$ can be represented using $g$ :
+            We pick out $h$ from $\mor{(A',A)}$ such that
+            $\id_{A'}(h)=\id_{A'}$. From \textbf{(a)} we know $\id_{A'}$ can be
+            represented using $g$ :
 			$$
 			\id_{A'}=\id_{A'}(h)=g\circ h
 			$$ 
-			On the other hand, we prove $\id_{A}^{-1}$ can be induced by $h$ using the similar method to \textbf{(a)}.
+            On the other hand, we prove $\id_{A}^{-1}$ can be induced by $h$
+            using the similar method to \textbf{(a)}.
 			$$
             \exists !\ \id_{A}\in \mor{(A,A)},\ \id_{A}(\id_{A})=g\in \mor{(A,A)}
 			$$ 
@@ -564,37 +626,38 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
 	\end{enumerate}
 \end{exercise}
 
-\begin{exercise}
-	\emph{(Skipped temporarily due to the star.)}
+\begin{exercise}[Skipped temporarily due to the star.]
 	\begin{enumerate}
-		\item We consider the contravariant functors of the morphisms $B\longrightarrow A$.
+        \item We consider the contravariant functors of the morphisms
+            $B\longrightarrow A$.
 		\item 
 	\end{enumerate}
 \end{exercise}
 
 \section{Limits and colimits}
-\begin{exercise}
-	\emph{(Trivial.)}\\
-	Since $\mathscr{I}$ is a partially ordered set, there's at most one morphism for any two object in $\mathscr{I}$. 
+\begin{exercise}[Trivial]
+    Since $\mathscr{I}$ is a partially ordered set, there's at most one morphism
+    for any two object in $\mathscr{I}$. 
 \end{exercise}
 
 \begin{exercise}
 	$$
 	\begin{tikzcd}
-X_1\times_ZX_2 \arrow[rd, dotted] \arrow[rdd] \arrow[rrd] &                                    &                                   &   \\
-                                                          & X_1\times_YX_2 \arrow[r] \arrow[d] & X_2 \arrow[d] \arrow[rdd, dashed] &   \\
-                                                          & X_1 \arrow[r] \arrow[rrd, dashed]  & Y \arrow[rd]                      &   \\
-                                                          &                                    &                                   & Z
+        X_1\times_ZX_2 \arrow[rd, dotted] \arrow[rdd] \arrow[rrd] &                                    &                                   &   \\
+                                                                  & X_1\times_YX_2 \arrow[r] \arrow[d] & X_2 \arrow[d] \arrow[rdd, dashed] &   \\
+                                                                  & X_1 \arrow[r] \arrow[rrd, dashed]  & Y \arrow[rd]                      &   \\
+                                                                  &                                    &                                   & Z
 	\end{tikzcd}
 	\begin{tikzcd}
-Y\times_{(Y\times_ZY)}(X_1\times_ZX_2) \arrow[d] \arrow[r] & X_1\times_ZX_2 \arrow[d] \\
-Y \arrow[r]                                                 & Y\times_ZY              
+        Y\times_{(Y\times_ZY)}(X_1\times_ZX_2) \arrow[d] \arrow[r] & X_1\times_ZX_2 \arrow[d] \\
+        Y \arrow[r]                                                 & Y\times_ZY              
 	\end{tikzcd}
 	$$ 
 	For $X_1\times _{Y}X_2$:
 	\begin{align*}
-		X_1\times _{Y}X_2\rightarrow Y&=X_1\times _{Y}X_2\rightarrow X_1\rightarrow Y\\
-					      &=X_1\times _{Y}X_2\rightarrow X_2\rightarrow Y
+		X_1\times _{Y}X_2\rightarrow Y
+        &=X_1\times _{Y}X_2\rightarrow X_1\rightarrow Y\\
+		&=X_1\times _{Y}X_2\rightarrow X_2\rightarrow Y
 	\end{align*}
 	$$
 	X_1\times _{Y}X_2\rightarrow Z=X_1\times _{Y}X_2\rightarrow Y\rightarrow Z
@@ -615,23 +678,26 @@ Y \arrow[r]                                                 & Y\times_ZY
 \begin{exercise}
 	$$
 	\begin{tikzcd}
-(a_i)_{i\in \mathscr{I}} \arrow[d] \arrow[rd] &     \\
-A_j \arrow[r]                       & A_k
-\end{tikzcd}
+        (a_i)_{i\in \mathscr{I}} \arrow[d] \arrow[rd] &     \\
+        A_j \arrow[r]                       & A_k
+    \end{tikzcd}
 	$$ 
 	Because from the definition of $(a_{i})_{i\in \mathscr{I}}$, we have
 	$$
 	F(m)(a_{j})=a_{k}
 	$$ 
-	So $(a_{i})_{i\in \mathscr{I}}A\longrightarrow A_{j}\longrightarrow A_{k}$ commutes with $(a_{i})_{i\in \mathscr{I}}\longrightarrow A_{k}$.
+    So $(a_{i})_{i\in \mathscr{I}}A\longrightarrow A_{j}\longrightarrow A_{k}$
+    commutes with $(a_{i})_{i\in \mathscr{I}}\longrightarrow A_{k}$.
 	\qed
 \end{exercise}
 
 \begin{exercise}
 	\leavevmode \vspace{-\baselineskip}
 	\begin{enumerate}
-		\item It means fractions converting into different denominators stands for the same rational number, which is obviously true.
-		\item Because we can view the set category as posets, where morphisms in between two objects are unique.
+        \item It means fractions converting into different denominators stands
+            for the same rational number, which is obviously true.
+        \item Because we can view the set category as posets, where morphisms in
+            between two objects are unique.
 	\end{enumerate}
 \end{exercise}
 
@@ -661,22 +727,44 @@ A_j \arrow[r]                       & A_k
 \begin{exercise}
     $$
         \begin{tikzcd}
-        {\mor_{\mathscr{B}}(F(A),B)} \arrow[r, "g^*"] \arrow[d, "\tau_{\mathcal{AB}}"] & {\mor_{\mathscr{B}}(F(A),B')} \arrow[d, "\tau_{\mathcal{AB'}}"] \\
-        {\mor_{\mathscr{A}}(A,G(B))} \arrow[r, "Gg^*"]                                 & {\mor_{\mathscr{A}}(A,G(B'))}                                  
+            {\mor_{\mathscr{B}}(F(A),B)} \arrow[r, "g^*"] \arrow[d, "\tau_{\mathcal{AB}}"] & {\mor_{\mathscr{B}}(F(A),B')} \arrow[d, "\tau_{\mathcal{AB'}}"] \\
+            {\mor_{\mathscr{A}}(A,G(B))} \arrow[r, "Gg^*"]                                 & {\mor_{\mathscr{A}}(A,G(B'))}                                  
         \end{tikzcd}
     $$
 \end{exercise}
 
 \begin{exercise}
-    \textbf{(FAILED)}
+    Use the natural property: For all $g:B'\longrightarrow B$, we have
+    $$
+        \begin{tikzcd}
+        {\mor_{\mathscr{B}}{(F(A),B')}} \arrow[r, "g^*"] \arrow[d, "\tau_{AB'}"] & {\mor_{\mathscr{B}}{(F(A),B)}} \arrow[d, "\tau_{AB}"] \\
+        {\mor_{\mathscr{A}}{(A,G(B'))}} \arrow[r, "Gg^*"]                        & {\mor_{\mathscr{A}}{(A,G(B))}}                       
+        \end{tikzcd}
+    $$
+    commutes. Therefore let $B'=F(A)$ and we'll have
+    $$
+        \begin{tikzcd}
+        {\mor_{\mathscr{B}}{(F(A),F(A))}} \arrow[r, "g^*"] \arrow[d, "\tau_{AF(A)}"] & {\mor_{\mathscr{B}}{(F(A),B)}} \arrow[d, "\tau_{AB}"] \\
+        {\mor_{\mathscr{A}}{(A,GF(A))}} \arrow[r, "Gg^*"]                            & {\mor_{\mathscr{A}}{(A,G(B))}}                       
+        \end{tikzcd}
+    $$
+    commutes. Take $\id_{F(A)}\in \mor_{\mathscr{B}}(F(A),F(A))$ we would have
+    \begin{align*}
+        \tau_{AB}(g)
+        &= \tau_{AB}\circ g\circ \id_{F(A)} \\
+        &= G(g)\circ \tau_{AF(A)}\circ \id_{F(A)}
+    .\end{align*}
+    Let $\eta_{A}=\tau_{AF(A)}(\id_{F(A)})$ and we're done.
+
+    On the other hand:
 \end{exercise}
 
 \begin{exercise}
     $$
 \begin{tikzcd}
-M\times N \arrow[rrr, "{\hom_{A}{(\hom_{A}{(N,P)})}}"] \arrow[dd] &  &  & P \\
-                                                                  &  &  &   \\
-M\otimes N \arrow[rrruu, "{\hom_{A}{(M\otimes _{A}N,P)}}"']       &  &  &  
+    M\times N \arrow[rrr, "{\hom_{A}{(\hom_{A}{(N,P)})}}"] \arrow[dd] &  &  & P \\
+                                                                      &  &  &   \\
+    M\otimes N \arrow[rrruu, "{\hom_{A}{(M\otimes _{A}N,P)}}"']       &  &  &  
 \end{tikzcd}
     $$
     For any $A$-bilinear map $M\times N\longrightarrow P$,
@@ -691,20 +779,20 @@ M\otimes N \arrow[rrruu, "{\hom_{A}{(M\otimes _{A}N,P)}}"']       &  &  &
 \end{exercise}
 
 \begin{exercise}
-    Define $F,G$ to be the functor $(\cdot)\otimes _{A}N,\hom_{A}(N,\cdot)$ respectively.
-    We need to prove those $\tau_{XY}$ are natual,
-    i.e. for $\forall \varphi:M\longrightarrow M',\psi:P\longrightarrow P'$
+    Define $F,G$ to be the functor $(\cdot)\otimes _{A}N,\hom_{A}(N,\cdot)$
+    respectively. We need to prove those $\tau_{XY}$ are natual, i.e. for
+    $\forall \varphi:M\longrightarrow M',\psi:P\longrightarrow P'$
     $$
     \begin{tikzcd}
-    {\hom_{A}{(M'\otimes_{A}N,P)}} \arrow[r, "F\varphi^{*}"] \arrow[d, "\tau_{M'P}"] & {\hom_{A}{(M\otimes_{A}N,P)}} \arrow[d, "\tau_{MP}"] \\
-    {\hom_{A}{(M',\hom_{A}{(N,P)})}} \arrow[r, "\varphi^{*}"]                        & {\hom_{A}{(M,\hom_{A}{(N,P)})}}                    
+        {\hom_{A}{(M'\otimes_{A}N,P)}} \arrow[r, "F\varphi^{*}"] \arrow[d, "\tau_{M'P}"] & {\hom_{A}{(M\otimes_{A}N,P)}} \arrow[d, "\tau_{MP}"] \\
+        {\hom_{A}{(M',\hom_{A}{(N,P)})}} \arrow[r, "\varphi^{*}"]                        & {\hom_{A}{(M,\hom_{A}{(N,P)})}}                    
     \end{tikzcd}
     $$
     and
     $$
     \begin{tikzcd}
-    {\hom_{A}{(M\otimes_{A}N,P)}} \arrow[r, "\psi^{*}"] \arrow[d, "\tau_{MP}"] & {\hom_{A}{(M\otimes_{A}N,P')}} \arrow[d, "\tau_{MP'}"] \\
-    {\hom_{A}{(M,\hom_{A}{(N,P)})}} \arrow[r, "G\psi^{*}"]                     & {\hom_{A}{(M,\hom_{A}{(N,P')})}}                     
+        {\hom_{A}{(M\otimes_{A}N,P)}} \arrow[r, "\psi^{*}"] \arrow[d, "\tau_{MP}"] & {\hom_{A}{(M\otimes_{A}N,P')}} \arrow[d, "\tau_{MP'}"] \\
+        {\hom_{A}{(M,\hom_{A}{(N,P)})}} \arrow[r, "G\psi^{*}"]                     & {\hom_{A}{(M,\hom_{A}{(N,P')})}}                     
     \end{tikzcd}
     $$
     commutes.
