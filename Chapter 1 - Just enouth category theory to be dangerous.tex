@@ -38,6 +38,7 @@
 \let\mod\relax
 \DeclareMathOperator{\mod}{Mod}
 \DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\bil}{Bil}
 
 \title{Chapter 1 - Just enough category theory to be dangerous}
 \author{Flandre}
@@ -756,25 +757,31 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
     .\end{align*}
     Let $\eta_{A}=\tau_{AF(A)}(\id_{F(A)})$ and we're done.
 
-    On the other hand:
+    On the other hand: vice versa.
+    \qed
 \end{exercise}
 
 \begin{exercise}
+    For $\forall \beta\in \bil{\left( M,N;P \right) }$, we may define
     $$
-\begin{tikzcd}
-    M\times N \arrow[rrr, "{\hom_{A}{(\hom_{A}{(N,P)})}}"] \arrow[dd] &  &  & P \\
-                                                                      &  &  &   \\
-    M\otimes N \arrow[rrruu, "{\hom_{A}{(M\otimes _{A}N,P)}}"']       &  &  &  
-\end{tikzcd}
+    f:M\longrightarrow \hom_{A}{\left( N,P \right)}
     $$
-    For any $A$-bilinear map $M\times N\longrightarrow P$,
-    we can operate this map by picking $M,N$ respectively,
-    which is equivalent to having $\hom_{A}{(\hom_{A}{(N,P)})}$.
-    Therefore, such bilinear map factors uniquely through $\hom_{A}{(\hom_{A}{(N,P)})}$.
-    And by the universal property of tensor product,
     $$
-    \hom_{A}{(M\otimes _{A}N,P)}\cong\hom_{A}{(\hom_{A}{(N,P)})}
+    m\longmapsto \beta\left( m,\left( - \right)  \right) 
     $$
+    i.e. $f\left( m \right) \left( n \right) =\beta\left( m,n \right) $.
+
+    For $\forall f\in \hom_{A}\left( M,\hom_{A}\left( N,P \right)  \right) $,
+    let
+    $$
+    \beta:M\times N\longrightarrow P
+    $$
+    $$
+    \left( m,n \right) \longmapsto f\left( m \right) \left( n \right)
+    $$
+    i.e. $\beta\left( m,n \right) =f\left( m \right) \left( n \right)$.
+
+    This defines the bijection.
     \qed
 \end{exercise}
 
@@ -798,6 +805,81 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
     commutes.
     This is obvious when we consider the proeprty of homomorphisms.
     \qed
+\end{exercise}
+
+\begin{exercise}
+    \leavevmode \vspace{-\baselineskip}
+    \begin{enumerate}[label=({\Roman*})]
+        \item 
+            $\tau_{NM}$:
+            For $\Phi:N\otimes _{B}A\longrightarrow M$, define
+            $$
+            \phi:N\longrightarrow M_{B}
+            $$
+            $$
+            n\longmapsto \Phi\left( n\otimes _{B}1_{A} \right) 
+            $$
+            
+            $\tau_{NM}^{-1}$:
+            On the other hand, for $\phi:N\longrightarrow M_{B}$, define
+            $$
+            \Phi:N\otimes _{B}A\longrightarrow M
+            $$
+            by
+            $$
+            \begin{tikzcd}
+            N\times A \arrow[rd, "\phi\times\id"] \arrow[dd, "\pi"] &                          &   \\
+                                                                    & M_{B}\times A \arrow[rd] &   \\
+            N\times_{B}A \arrow[rr, "\Phi", dashed]                 &                          & M
+            \end{tikzcd}
+            $$
+            and we have
+            $$
+            \Phi:n\otimes _{B}a\longmapsto a\phi\left( n \right) 
+            $$
+
+            Obviously the maps defined above are inverses to each other.
+        \item 
+            We need to show such bijection (transformation) is natural, i.e.
+            $\forall f\in \hom_{A}\left( M,M' \right)$,
+            $$
+            \begin{tikzcd}
+            {\hom_{A}(N\otimes_{B}A,M)} \arrow[d, "\tau_{NM}"] \arrow[r,"f^{*}"] & {\hom_{A}(N\otimes_{B}A,M')} \arrow[d, "\tau_{NM'}"] \\
+            {\hom_{B}(N,M_{B})} \arrow[r, "(f^{*})_{B}"]                          & {\hom_{B}(N,M'_{B})}                               
+            \end{tikzcd}
+            $$
+            commute, while $\forall g\in \hom_{B}\left( N,N' \right) $,
+            $$
+            \begin{tikzcd}
+            {\hom_{A}(N'\otimes_{B}A,M)} \arrow[d, "\tau_{N'M}"] \arrow[r,"g^{*}\otimes_{B}\id_{A}"] & {\hom_{A}(N\otimes_{B}A,M)} \arrow[d, "\tau_{NM}"] \\
+            {\hom_{B}(N',M_{B})} \arrow[r, "g^{*}"]                                                   & {\hom_{B}(N,M_{B})}                              
+            \end{tikzcd}
+            $$
+            commutes.
+
+            Pick a homomorphism from the start, then track it through the
+            diagram directly and we're done.
+    \end{enumerate}
+    \qed
+\end{exercise}
+
+\begin{exercise}[Trivial]
+\end{exercise}
+
+\begin{exercise}[Follow the hint, trivial]
+    \emph{(It's just like constructing a fraction field of a ring.)}
+\end{exercise}
+
+\begin{exercise}
+    From \textbf{Exercise 1.4.E}, for ring homomorphism
+    $$
+    A\longrightarrow S^{-1}A
+    $$
+    we have
+    $$
+    \hom_{S^{-1}A}\left( S^{-1}N,M \right) \cong \hom_{A}\left( N,M_{A} \right) 
+    $$
+    \emph{(I suppose the rest is trivial.)}
 \end{exercise}
 
 \end{document}
