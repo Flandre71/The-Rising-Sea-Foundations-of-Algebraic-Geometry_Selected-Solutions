@@ -30,6 +30,8 @@
 
 \DeclareMathOperator{\id}{Id}
 \DeclareMathOperator{\mor}{Mor}
+\DeclareMathOperator{\coker}{Coker}
+\DeclareMathOperator{\im}{Im}
 \DeclareMathOperator{\colim}{Colim}
 \let\hom\relax
 \DeclareMathOperator{\hom}{Hom}
@@ -39,6 +41,8 @@
 \DeclareMathOperator{\mod}{Mod}
 \DeclareMathOperator{\pr}{pr}
 \DeclareMathOperator{\bil}{Bil}
+\let\dim\relax
+\DeclareMathOperator{\dim}{Dim}
 
 \title{Chapter 1 - Just enough category theory to be dangerous}
 \author{Flandre}
@@ -358,7 +362,7 @@
 \begin{exercise}
     Intersection.
 
-    Becuase morphisms are inclusion embeddings.
+    Because morphisms are inclusion embeddings.
 \end{exercise}
 
 \begin{exercise}
@@ -500,7 +504,7 @@ D &                                                       &                     
         X \arrow[r, "\alpha"']                                                                       & Y \arrow[r, "\beta"'] & Z
 	\end{tikzcd}
 	$$ 
-	From the graph we obtian the proof easily.
+	From the graph we obtain the proof easily.
 \end{exercise}
 
 \begin{exercise}
@@ -603,7 +607,7 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
 	\begin{enumerate}
         \item We simply let $\id_{C}$ correspond to the morphism
             $A\longrightarrow A'$ and verify the properties stated in the
-            problems. Also, uniqueness can be obtianed by letting $C=A$.
+            problems. Also, uniqueness can be obtained by letting $C=A$.
 		\item We follow from the hint: Let $C=A'$ and we get a bijection
 			$$
 			\id_{A'}:(\mor(A',A))\longrightarrow (\mor(A',A'))
@@ -880,6 +884,230 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
     \hom_{S^{-1}A}\left( S^{-1}N,M \right) \cong \hom_{A}\left( N,M_{A} \right) 
     $$
     \emph{(I suppose the rest is trivial.)}
+\end{exercise}
+
+\section{An introduction to abelian categories}
+
+\begin{exercise}[Trivial]
+\end{exercise}
+
+\begin{exercise}
+    \begin{align*}
+        \sum_{i=1}^{n} \left( -1 \right) ^{i}\dim{A^{i}}
+        &= \sum_{i=1}^{n} \left( -1 \right)^{i}\left(
+        \dim{\ker{f^{i}}}+\dim{\im{f^{i}}} \right)    \\
+        &= \sum_{i=1}^{n} \left( -1 \right) ^{i}\left(
+        \dim{\ker{f^{i}}}-\dim{\im{f^{i-1}}} \right) \\
+        &= \sum_{i=1}^{n} \left( -1 \right) ^{i}h^{i}\left( A^{\bullet } \right)
+    \end{align*}
+    \qed
+\end{exercise}
+
+\begin{exercise}
+    This is obtained immediately from $\mathscr{C}$ being abelian category.
+    \qed
+\end{exercise}
+
+\begin{exercise}
+    \leavevmode \vspace{-\baselineskip}
+    \begin{enumerate}[label=({\roman*})]
+        \item 
+            By (1.5.6.3) we know any chain complex
+            $$
+            \ldots \longrightarrow A^{i-1}\xrightarrow[]{f^{i-1}}
+            A^{i}\xrightarrow[]{f^{i}}A^{i+1}\xrightarrow[]{f^{i+1}} \ldots 
+            $$
+            can be decomposed into series of 
+            $$
+            0\longrightarrow \ker{f^{i}}\longrightarrow A^{i}\longrightarrow
+            \im{f^{i}}\longrightarrow 0
+            $$
+            and
+            $$
+            0\longrightarrow \im{f^{i-1}}\longrightarrow
+            \ker{f^{i}}\longrightarrow H^{i}(A^{\bullet })\longrightarrow 0
+            .$$
+            Therefore the any homomorphism bewteen chain complexes naturally
+            induces homomorphisms such as
+            $$
+            \ker{f^{i}}\longrightarrow \ker{g^{i}}
+            $$
+            and
+            $$
+            \im{f^{i}}\longrightarrow \im{g^{i}}
+            .$$
+            Hence
+            $$
+            \ker{f^{i}}/\im{f^{i-1}}\longrightarrow \ker{g^{i}}/\im{g^{i-1}}
+            $$
+            i.e.
+            $$
+            H^{i}(A^{\bullet })\longrightarrow H^{i}(B^{\bullet })
+            .$$
+            Done.
+        \item 
+            \emph{(I think it's trivial.)}
+    \end{enumerate}
+    \qed
+\end{exercise}
+
+\begin{exercise}
+    $$
+    \begin{tikzcd}
+    \ldots \arrow[r] & C^{i-1} \arrow[r, "d_{C}^{i-1}"] \arrow[d, bend right] \arrow[d, bend left] \arrow[ld] & C^{i} \arrow[r, "d_{C}^{i}"] \arrow[d, bend right] \arrow[d, bend left] \arrow[ld] & C^{i+1} \arrow[r, "d_{C}^{i+1}"] \arrow[d, bend right] \arrow[d, bend left] \arrow[ld] & \ldots \arrow[ld] \\
+    \ldots \arrow[r] & D^{i-1} \arrow[r, "d_{D}^{i-1}"]                                                       & D^{i} \arrow[r, "d_{D}^{i}"]                                                       & D^{i+1} \arrow[r, "d_{D}^{i+1}"]                                                       & \ldots           
+    \end{tikzcd}
+    $$
+    
+    This is euqivalent to prove $f-g$ is gives the zero mapping on homology,
+    i.e. $dw-wd$ gives the zero mapping on homology, which is trivial.
+    \qed
+\end{exercise}
+
+\begin{exercise}[Trivial]
+    \emph{(Just decompose those sequences)}
+\end{exercise}
+
+\begin{exercise}
+    \leavevmode \vspace{-\baselineskip}
+    \begin{enumerate}[label=({\alph*})]
+        \item 
+            Trivial.
+        \item \begin{enumerate}[label=({\roman*})]
+            \item 
+                See \emph{[Introduction to Commutative Algebra,
+                \textbf{Proposition 2.18} -- M. Atiyah]}, trivial.
+            \item 
+            \end{enumerate}
+        \item \begin{enumerate}[label=({\roman*})]
+            \item 
+                See \emph{[Introduction to Commutative Algebra,
+                \textbf{Proposition 2.9} -- M. Atiyah]}, trivial.
+            \item 
+            \end{enumerate}
+        \item \begin{enumerate}[label=({\roman*})]
+            \item 
+                See \emph{[Introduction to Commutative Algebra,
+                \textbf{Proposition 2.9} -- M. Atiyah]}, trivial.
+            \item 
+            \end{enumerate}
+    \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+    First, by
+    $$
+    A^{\bigoplus q}\longrightarrow A^{\bigoplus p}\longrightarrow
+    A^{M}\longrightarrow 0  
+    $$
+    being exact, we have
+    $$
+    S^{-1}A^{\bigoplus q}\longrightarrow S^{-1}A^{\bigoplus p}\longrightarrow
+    S^{-1}A^{M}\longrightarrow 0  
+    $$
+    being exact, hence
+    $$
+    0\longrightarrow \hom_{S^{-1}A}{(S^{-1}A^{\bigoplus
+    q},S^{-1}N)}\longrightarrow \hom_{S^{-1}A}{(S^{-1}A^{\bigoplus
+    p},S^{-1}N)}\longrightarrow \hom_{S^{-1}A}{(S^{-1}M,S^{-1}N)}
+    $$
+    is exact.
+
+    On the other hand, 
+    $$
+    A^{\bigoplus q}\longrightarrow A^{\bigoplus p}\longrightarrow
+    A^{M}\longrightarrow 0  
+    $$
+    being exact implies
+    $$
+    0\longrightarrow \hom_{A}{(A^{\bigoplus q},N)}\longrightarrow
+    \hom_{A}{(A^{\bigoplus p}),N}\longrightarrow \hom_{A}{(M,N)}
+    $$
+    is exact, therefore
+    $$ 0\longrightarrow S^{-1}\hom_{A}{(A^{\bigoplus q},N)}\longrightarrow
+    S^{-1}\hom_{A}{(A^{\bigoplus p}),N}\longrightarrow S^{-1}\hom_{A}{(M,N)}
+    $$
+    is exact.
+
+    It's easy to define a natural homomorphism
+    $S^{-1}\hom_{A}{(M,N)}\longrightarrow \hom_{S^{-1}A}{(S^{-1}M,S^{-1}N)}$
+    explicitly. Also, obviously
+    $$
+    \hom_{S^{-1}A}{(S^{-1}A,S^{-1}N)}\cong S^{-1}N\text{ by
+    }\overline{f}\longmapsto f(1)
+    $$
+    and
+    $$
+    S^{-1}\hom_{A}{(M,N)}\cong S^{-1}N\text{ by }\frac{f}{s}\longmapsto
+    \frac{f(1)}{s}
+    .$$
+    Therefore we have the direct sum
+    $$
+    \hom_{S^{-1}A}{(S^{-1}A^{\bigoplus{r}},S^{-1}N)}\cong 
+    \left( S^{-1}N \right) ^{\bigoplus{r}}\cong 
+    S^{-1}\hom_{A}{(M^{\bigoplus{r}},N)}
+    .$$
+    \qed
+\end{exercise}
+
+\begin{exercise}
+    \emph{(Note that in homological algebra, it's a consequence that every left,
+    right exact, or exact, functor is additive. Therefore it's well-defined to
+write} $H^{\bullet}F$\emph{.)}
+
+    We follow the hint: consider the exact sequence
+    $$
+    C^{i}\xrightarrow[]{d^{i}} C^{i+1}\longrightarrow
+    \coker{d^{i}}\longrightarrow 0
+    $$
+    and apply it with functor $F$, we have
+    $$
+    F\left( C^{i} \right) \xrightarrow[]{F\left( d^{i} \right) } F\left( C^{i+1}
+    \right) \longrightarrow F\coker{d^{i}}
+    $$
+    being exact. But at the same time we have the exact sequence
+    $$
+    F\left( C^{i} \right) \xrightarrow[]{F\left( d^{i} \right) } F\left( C^{i+1}
+    \right) \longrightarrow \coker{F{d^{i}}}
+    $$
+    hence $F{\coker{d^{i}}}\cong \coker{F{d^{i}}}$.
+
+    From (1.5.6.4), we know
+    $$
+    0\longrightarrow \im{d^{i}}\longrightarrow C^{i+1}\longrightarrow
+    \coker{d^{i}}\longrightarrow 0
+    $$
+    is exact. Apply it with $F$,
+    $$
+    F{\im{d^{i}}}\longrightarrow F{C^{i+1}}\longrightarrow
+    F{\coker{d^{i}}}\longrightarrow 0
+    $$
+    is exact.
+    $$
+    \begin{tikzcd}
+                                                &                          &                                 & \coker{F{d^{i}}} \arrow[rd]                           &   \\
+    F{\im{d^{i}}} \arrow[rr] \arrow[rd, dotted] &                          & F{C^{i+1}} \arrow[r] \arrow[ru] & F{\coker{d^{i}}} \arrow[u, no head, dashed] \arrow[r] & 0 \\
+                                                & \im{F{d^{i}}} \arrow[ru] &                                 &                                                       &  
+    \end{tikzcd}
+    $$
+    and we have the epimorphism
+    $$
+    F{\im{d^{i}}}\longrightarrow \im{F{d^{i}}}\longrightarrow 0
+    $$
+
+    Again from (1.5.6.4), we know
+    $$
+    0\longrightarrow H^{i}\left( C^{\bullet} \right) \longrightarrow
+    \coker{d^{i-1}}\longrightarrow \im{d^{i}}\longrightarrow 0
+    $$
+    is exact. Apply it with F,
+    $$
+    \begin{tikzcd}
+    F{H^{i}{(C^{\bullet})} } \arrow[r] \arrow[d, dotted] & F\left( \coker{d^{i-1}} \right) \arrow[r] \arrow[d, no head] & F\left( \im{d^{i}} \right) \arrow[r] \arrow[d, two heads] & 0 \\
+    H^{i}F{(C^{\bullet})} \arrow[r]                      & \coker{F{d^{i-1}}} \arrow[r]                                 & \im{F{d^{i}}} \arrow[r]                                   & 0
+    \end{tikzcd}
+    $$
+    we obtain the natural morphism.
 \end{exercise}
 
 \end{document}
