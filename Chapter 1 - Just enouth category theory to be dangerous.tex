@@ -31,18 +31,20 @@
 \DeclareMathOperator{\id}{Id}
 \DeclareMathOperator{\mor}{Mor}
 \DeclareMathOperator{\coker}{Coker}
+\let\ker\relax
+\DeclareMathOperator{\ker}{Ker}
 \DeclareMathOperator{\im}{Im}
 \DeclareMathOperator{\colim}{Colim}
 \let\hom\relax
 \DeclareMathOperator{\hom}{Hom}
-\let\gcd\relax
-\DeclareMathOperator{\gcd}{Gcd}
 \let\mod\relax
 \DeclareMathOperator{\mod}{Mod}
 \DeclareMathOperator{\pr}{pr}
 \DeclareMathOperator{\bil}{Bil}
 \let\dim\relax
 \DeclareMathOperator{\dim}{Dim}
+\let\gcd\relax
+\DeclareMathOperator{\gcd}{Gcd}
 
 \title{Chapter 1 - Just enough category theory to be dangerous}
 \author{Flandre}
@@ -1050,64 +1052,134 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
     \qed
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}[Beautiful!]
     \emph{(Note that in homological algebra, it's a consequence that every left,
-    right exact, or exact, functor is additive. Therefore it's well-defined to
-write} $H^{\bullet}F$\emph{.)}
+    right exact, or exact, functor being additive. Therefore it's well-defined
+    to write} $H^{\bullet}F$\emph{.)}
 
-    We follow the hint: consider the exact sequence
-    $$
-    C^{i}\xrightarrow[]{d^{i}} C^{i+1}\longrightarrow
-    \coker{d^{i}}\longrightarrow 0
-    $$
-    and apply it with functor $F$, we have
-    $$
-    F\left( C^{i} \right) \xrightarrow[]{F\left( d^{i} \right) } F\left( C^{i+1}
-    \right) \longrightarrow F\coker{d^{i}}
-    $$
-    being exact. But at the same time we have the exact sequence
-    $$
-    F\left( C^{i} \right) \xrightarrow[]{F\left( d^{i} \right) } F\left( C^{i+1}
-    \right) \longrightarrow \coker{F{d^{i}}}
-    $$
-    hence $F{\coker{d^{i}}}\cong \coker{F{d^{i}}}$.
+    \begin{enumerate}[label=({\roman*})]
+        \item 
+            We follow the hint: consider the exact sequence
+            $$
+            C^{i}\xrightarrow[]{d^{i}} C^{i+1}\longrightarrow
+            \coker{d^{i}}\longrightarrow 0
+            $$
+            and apply it with functor $F$, we have
+            $$
+            F\left( C^{i} \right) \xrightarrow[]{F\left( d^{i} \right) } F\left(
+            C^{i+1} \right) \longrightarrow F\coker{d^{i}}\longrightarrow 0
+            $$
+            being exact. But at the same time we have the exact sequence
+            $$
+            F\left( C^{i} \right) \xrightarrow[]{F\left( d^{i} \right) } F\left(
+            C^{i+1} \right) \longrightarrow \coker{F{d^{i}}}\longrightarrow 0
+            .$$
+            Hence $F{\coker{d^{i}}}\cong \coker{F{d^{i}}}$.
 
-    From (1.5.6.4), we know
-    $$
-    0\longrightarrow \im{d^{i}}\longrightarrow C^{i+1}\longrightarrow
-    \coker{d^{i}}\longrightarrow 0
-    $$
-    is exact. Apply it with $F$,
-    $$
-    F{\im{d^{i}}}\longrightarrow F{C^{i+1}}\longrightarrow
-    F{\coker{d^{i}}}\longrightarrow 0
-    $$
-    is exact.
+            From (1.5.6.4), we know
+            $$
+            0\longrightarrow \im{d^{i}}\longrightarrow C^{i+1}\longrightarrow
+            \coker{d^{i}}\longrightarrow 0
+            $$
+            is exact. Apply it with $F$,
+            $$
+            F{\im{d^{i}}}\longrightarrow F{C^{i+1}}\longrightarrow
+            F{\coker{d^{i}}}\longrightarrow 0
+            $$
+            is exact.
+            $$
+            \begin{tikzcd}
+                                                        &                          &                                 & \coker{F{d^{i}}} \arrow[rd]                           &   \\
+            F{\im{d^{i}}} \arrow[rr] \arrow[rd, dotted] &                          & F{C^{i+1}} \arrow[r] \arrow[ru] & F{\coker{d^{i}}} \arrow[u, no head, dashed] \arrow[r] & 0 \\
+                                                        & \im{F{d^{i}}} \arrow[ru] &                                 &                                                       &  
+            \end{tikzcd}
+            $$
+            and we have the epimorphism
+            $$
+            F{\im{d^{i}}}\longrightarrow \im{F{d^{i}}}\longrightarrow 0
+            $$
+
+            Again from (1.5.6.4), we know
+            $$
+            0\longrightarrow H^{i}\left( C^{\bullet} \right) \longrightarrow
+            \coker{d^{i-1}}\longrightarrow \im{d^{i}}\longrightarrow 0
+            $$
+            is exact. Apply it with F,
+            $$
+            \begin{tikzcd}
+                        & F{H^{i}{(C^{\bullet})} } \arrow[r] \arrow[d, dotted] & F\left( \coker{d^{i-1}} \right) \arrow[r] \arrow[d, "\sim"] & F\left( \im{d^{i}} \right) \arrow[r] \arrow[d, two heads] & 0 \\
+            0 \arrow[r] & H^{i}F{(C^{\bullet})} \arrow[r]                      & \coker{F{d^{i-1}}} \arrow[r]                                & \im{F{d^{i}}} \arrow[r]                                   & 0
+            \end{tikzcd}
+            $$
+            we obtain the natural morphism by universal property.
+        \item 
+            Similar to \emph{(i)}, we use the two short exact sequences in
+            (1.5.6.3) and obtain
+            $$
+            \begin{tikzcd}
+            0 \arrow[r] & \im{F{d^{i-1}}} \arrow[r] \arrow[d, hook] & \ker{F{d^{i}}} \arrow[r] \arrow[d, "\sim"] & H^{i}{(F{C^{\bullet}})} \arrow[r] \arrow[d, dotted] & 0 \\
+            0 \arrow[r] & F{\im{d^{i-1}}} \arrow[r]                 & F{\ker{d^{i}}} \arrow[r]                   & F{H^{i}{(C^{\bullet})}}                             &  
+            \end{tikzcd}
+            .$$
+            Done
+        \item 
+            If $F$ is exact, the epimorphism
+            $$
+            F{\im{d^{i}}}\longrightarrow \im{F{d^{i}}}\longrightarrow 0
+            $$
+            obtained in \emph{(i)} becomes isomorphism
+            $$
+            F{\im{d^{i}}}\cong\im{F{d^{i}}}
+            ,$$
+            therefore the induced natural morphism is an isomorphism. The same
+            story goes to \emph{(ii)}. Thus the morphism in \emph{(i)} and
+            \emph{(ii)}, denoted by $\alpha,\beta$, are both isomorphisms. Now
+            we'll prove they're acturally inverses to each other:
+
+            Consider
+            $$
+            \begin{tikzcd}
+            0 \arrow[r] & \ker{F(d^i)} \arrow[r, two heads] \arrow[d, "\sim"]  & H^iF(C^\bullet) \arrow[r, hook] \arrow[d, "\beta"]    & \coker{F(d^{i-1})} \arrow[d, "\sim"] \arrow[r] & 0 \\
+            0 \arrow[r] & F(\ker{d^i}) \arrow[r, two heads]                    & F(H^i(C^\bullet)) \arrow[r, hook] \arrow[d, "\alpha"] & F(\coker{d^{i-1}}) \arrow[d, "\sim"] \arrow[r] & 0 \\
+            0 \arrow[r] & \ker{F(d^i)} \arrow[u, "\sim"'] \arrow[r, two heads] & H^iF(C^\bullet) \arrow[r, hook]                       & \coker{F(d^{i-1})} \arrow[r]                   & 0
+            \end{tikzcd}
+            .$$
+            We have
+            $$
+            (\text{mono}) \circ (\alpha \circ \beta) \circ (\text{epi}) =
+            (\text{mono}) \circ \text{id}_{H^iF(C^\bullet)} \circ (\text{epi})
+            $$
+            By the cancellation law of monomorphism and epimorphism, we have
+            $$
+            \alpha\circ \beta=\id
+            $$
+            \qed
+    \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+    Chase the diagrams and obtain those commute diagrams:
     $$
     \begin{tikzcd}
-                                                &                          &                                 & \coker{F{d^{i}}} \arrow[rd]                           &   \\
-    F{\im{d^{i}}} \arrow[rr] \arrow[rd, dotted] &                          & F{C^{i+1}} \arrow[r] \arrow[ru] & F{\coker{d^{i}}} \arrow[u, no head, dashed] \arrow[r] & 0 \\
-                                                & \im{F{d^{i}}} \arrow[ru] &                                 &                                                       &  
+                                                                                                              & i \arrow[d] \arrow[rd]                                                               &                     \\
+    \ker{h_i} \arrow[r]                                                                                       & A_i \arrow[r]                                                                        & B_i                 \\
+    \lim{\ker{h_i}} \arrow[u] \arrow[r] \arrow[d, "\exists!", dotted] \arrow[rr, "0" description, bend right] & \lim{A_i} \arrow[r, "\exists!"] \arrow[u] \arrow[lu, "\exists!" description, dotted] & \lim{B_i} \arrow[u] \\
+    \ker{(\lim{A_i}\rightarrow\lim{B_i})} \arrow[ru]                                                            &                                                                                      &                    
     \end{tikzcd}
     $$
-    and we have the epimorphism
-    $$
-    F{\im{d^{i}}}\longrightarrow \im{F{d^{i}}}\longrightarrow 0
-    $$
-
-    Again from (1.5.6.4), we know
-    $$
-    0\longrightarrow H^{i}\left( C^{\bullet} \right) \longrightarrow
-    \coker{d^{i-1}}\longrightarrow \im{d^{i}}\longrightarrow 0
-    $$
-    is exact. Apply it with F,
     $$
     \begin{tikzcd}
-    F{H^{i}{(C^{\bullet})} } \arrow[r] \arrow[d, dotted] & F\left( \coker{d^{i-1}} \right) \arrow[r] \arrow[d, no head] & F\left( \im{d^{i}} \right) \arrow[r] \arrow[d, two heads] & 0 \\
-    H^{i}F{(C^{\bullet})} \arrow[r]                      & \coker{F{d^{i-1}}} \arrow[r]                                 & \im{F{d^{i}}} \arrow[r]                                   & 0
+                                                                           & C \arrow[d] \arrow[rd] \arrow[rrd, "0"]                       &                         &               \\
+    \lim{A_i} \arrow[r, dotted] \arrow[rd, "\exists!" description, dotted] & \ker{h_i} \arrow[r] \arrow[d, "\exists!" description, dotted] & A_i \arrow[r] \arrow[d] & B_i \arrow[d] \\
+                                                                           & \ker{h_j} \arrow[r]                                           & A_j \arrow[r]           & B_i           \\
+    \ker{(\lim{A_i}\rightarrow\lim{B_i})} \arrow[uu]                       &                                                               &                         &              
     \end{tikzcd}
     $$
-    we obtain the natural morphism.
+    \qed
+\end{exercise}
+
+\begin{exercise}
+    
 \end{exercise}
 
 \end{document}
