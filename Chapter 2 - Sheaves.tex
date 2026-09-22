@@ -1,0 +1,98 @@
+\documentclass{article}
+\usepackage{geometry}
+\geometry{a4paper,scale=0.8}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath, amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz-cd}
+\usepackage{mathrsfs}
+
+\newtheoremstyle{breakstyle}
+    {5pt}
+    {10pt}
+    % {\normalfont}
+    {\itshape}
+    {0pt}
+    {\bfseries}
+    {\newline\indent}
+    {0pt}
+    {\thmname{#1}\thmnumber{ #2}\thmnote{ \textbf{[#3]}}}
+\theoremstyle{breakstyle}
+\newtheorem{exercise}{Exercise}[section]
+\renewcommand{\theexercise}{\thesection.\Alph{exercise}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{lemma}{Lemma}[section]
+
+\DeclareMathOperator{\id}{Id}
+\DeclareMathOperator{\mor}{Mor}
+\DeclareMathOperator{\coker}{Coker}
+\let\ker\relax
+\DeclareMathOperator{\ker}{Ker}
+\DeclareMathOperator{\im}{Im}
+\let\lim\relax
+\DeclareMathOperator{\lim}{Lim}
+\DeclareMathOperator{\colim}{Colim}
+\let\hom\relax
+\DeclareMathOperator{\hom}{Hom}
+\let\mod\relax
+\DeclareMathOperator{\mod}{Mod}
+\DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\bil}{Bil}
+\let\dim\relax
+\DeclareMathOperator{\dim}{Dim}
+\let\gcd\relax
+\DeclareMathOperator{\gcd}{Gcd}
+
+\title{Chapter 2 - Sheaves}
+\author{Flandre}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Motivating example: The sheaf of smooth functions}
+
+\begin{exercise}
+Show that this is the only maximal ideal of $O_{p}$ . (Hint: show that every
+element of $O_{p} \setminus m_{p}$ is invertible.)
+
+\begin{proof}
+    For $\forall \left( f,U \right) \in \mathscr{O}_{p}\backslash
+    \mathfrak{m}_{p}$, we have
+    $$
+    \left( \frac{1}{f}, U'\right)\in \mathscr{O}_{p}\backslash \mathfrak{m}_{p}
+    $$
+    in a neighbourhood $U'$ of $p$, hence invertible.
+    \qed
+\end{proof}
+
+\end{exercise}
+
+\begin{exercise}[Skipped. I haven't learnt Differential Geometry yet]
+EXERCISE FOR THOSE WITH DIFFERENTIAL GEOMETRIC BACKGROUND.
+
+Prove this. (Rhetorical question for experts: what goes wrong if the sheaf of
+continuous functions is substituted for the sheaf of smooth functions? What goes
+wrong if you use the sheaf of $C^{1}$ functions?)
+\end{exercise}
+
+\section{Definition of sheaf and presheaf}
+
+\begin{exercise}[Trivial]
+EXERCISE FOR CATEGORY-LOVERS: “A PRESHEAF IS THE SAME AS A CONTRAVARIANT
+FUNCTOR”.
+
+Given any topological space X, we have a “category of open sets” (Example
+1.1.9), where the objects are the open sets and the morphisms are inclusions.
+Verify that the data of a presheaf is precisely the data of a contravariant
+functor from the category of open sets of X to the category of sets. (This
+interpretation is surprisingly useful.)  
+\end{exercise}
+
+\end{document}
