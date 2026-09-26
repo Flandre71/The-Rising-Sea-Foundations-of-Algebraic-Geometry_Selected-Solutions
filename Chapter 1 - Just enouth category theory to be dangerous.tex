@@ -12,7 +12,8 @@
 \newtheoremstyle{breakstyle}
     {5pt}
     {10pt}
-    {\normalfont}
+    % {\normalfont}
+    {\itshape}
     {0pt}
     {\bfseries}
     {\newline\indent}
@@ -27,6 +28,10 @@
 \newtheorem{remark}{Remark}[section]
 \newtheorem{definition}{Definition}[section]
 \newtheorem{lemma}{Lemma}[section]
+
+\newenvironment{solution}
+  {\begin{proof}[Solution.]\renewcommand{\qedsymbol}{}}
+  {\end{proof}}
 
 \DeclareMathOperator{\id}{Id}
 \DeclareMathOperator{\mor}{Mor}
@@ -57,7 +62,21 @@
 
 \section{Categories and functors}
 \begin{exercise}
-	\leavevmode \vspace{-\baselineskip}
+UNIMPORTANT EXERCISE.
+
+A category in which each morphism is an isomorphism is called a groupoid.
+(This notion is not important in what we will discuss. The point of this
+exercise is to give you some practice with categories, by relating them to
+an object you know well.)
+
+\begin{enumerate}[label=({\alph*})]
+\item A perverse definition of a group is: a groupoid with one object. Make
+    sense of this. (Similarly, in case you care: a perverse definition of a
+    monoid is: a category with one object.)
+\item Describe a groupoid that is not a group.
+\end{enumerate}
+
+\begin{solution}
 	\begin{enumerate}
         \item Since there's only one object, namely $e$, in the category, all
             the morphisms in such category will send $e$ to $e$.
@@ -80,10 +99,26 @@
             corresponding to $\id_{A},\id_{B}$ cannot have multiplication ,
             therefore not a group.
 	\end{enumerate}
+\end{solution}
+
 \end{exercise}
 
 \begin{exercise}
-	\leavevmode \vspace{-\baselineskip}
+If $A$ is an object in a category $\mathcal{C}$, show that the invertible
+elements of $\mor(A,A)$ form a group (called the automorphism group of $A$,
+denoted $\operatorname{Aut}(A)$). What are the automorphism groups of the
+objects in Examples 1.1.2 and 1.1.3? Show that two isomorphic objects have
+isomorphic automorphism groups. (For readers with a topological background:
+if $X$ is a topological space, then the fundamental groupoid is the category
+where the objects are points of $X$, and the morphisms $x\to y$ are paths
+from $x$ to $y$, up to homotopy. Then the automorphism group of $x_{0}$ is
+the (pointed) fundamental group $\pi_{1}(X,x_{0})$. In the case where $X$ is
+connected, and $\pi_{1}(X)$ is not abelian, this illustrates the fact that
+for a connected groupoid --- whose definition you can guess --- the
+automorphism groups of the objects are all isomorphic, but not canonically
+isomorphic.)
+
+\begin{proof}
 		\begin{enumerate}
             \item Similar to the case in \textbf{1.1.A}, we can use exactly the
                 same proof to show that invertible elements of
@@ -94,26 +129,51 @@
                 those invertible linear transformations mapping a linear space
                 to itself.
 		\end{enumerate}
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}[Skipped, require \textbf{1.1.21} to solve.]
-	\leavevmode \vspace{-\baselineskip}
+Let $(\cdot)^{\vee\vee}:f.d.Vec_{k}\to f.d.Vec_{k}$ be the double dual
+functor from the category of finite-dimensional vector spaces over $k$ to
+itself. Show that $(\cdot)^{\vee\vee}$ is naturally isomorphic to the
+identity functor on $f.d.Vec_{k}$. (Without the finite-dimensionality
+hypothesis, we only get a natural transformation of functors from id to
+$(\cdot)^{\vee\vee}$.)
+
+\begin{proof}
     \begin{enumerate}[label=({\roman*})]
         \item In the case of finite cases, the set of bases of
             $Vec_{k},Vec_{k}^{\vee}$ is finite. Therefore the functor
             $(\cdot)^{\vee}$ must be isomorphism.
 	\end{enumerate}
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+Show that $\mathcal{V} \rightarrow f.d.Vec_{k}$ gives an equivalence of
+categories, by describing an ``inverse'' functor. (Recall that we are being
+cavalier about set-theoretic assumptions, see Caution 0.3.1, so feel free to
+simultaneously choose bases for each vector space in $f.d.Vec_{k}$. To make
+this precise, you will need to use G\"{o}del-Bernays set theory or else
+replace $f.d.Vec_{k}$ with a very similar small category, but we won't worry
+about this.)
+
+\begin{proof}
     Since it's finite, just find out the bases and we can define a trivial
     isomorphism between $\mathscr{V}$ and $f.d.Vec_{k}$ by mapping those bases
     respectively.
+\end{proof}
+
 \end{exercise}
 
 \section{Universal properties determine an object up to unique isomorphism}
 \begin{exercise}
-	\leavevmode \vspace{-\baselineskip}
+Show that any two initial objects are uniquely isomorphic. Show that any two
+final objects are uniquely isomorphic.
+
+\begin{proof}
 	\begin{enumerate}
 		\item For any two initial objects $A,B$, we define
 			 $$
@@ -131,13 +191,17 @@
 				& Id_{B}=\psi\circ\varphi
 			.\end{align*}
 			So we know $\varphi,\phi$ are isomorphisms.
-			\qed
 		\item The proof is similar to \emph{(a)}, skipped.
 	\end{enumerate}
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
-	\leavevmode \vspace{-\baselineskip}
+What are the initial and final objects in Sets, Rings, and Top (if they
+exist)? How about in the two examples of \S\emph{1.1.9}?
+
+\begin{solution}
 	\begin{enumerate}
         \item In the category of sets, the initial and final object is
             $\emptyset$ and the class of all sets, respectively.
@@ -145,10 +209,27 @@
             ring and the class of all rings, respectively.
 		\item \emph{Skipped (haven't learn topology yet).}
 	\end{enumerate}
+\end{solution}
+
 \end{exercise}
 
 \begin{exercise}
-	\leavevmode \vspace{-\baselineskip}
+Show that $A \to S^{-1}A$ is injective if and only if $S$ contains no
+zerodivisors. (A zerodivisor of a ring $A$ is an element $a$ such that there
+is a nonzero element $b$ with $ab = 0$. The other elements of $A$ are called
+non-zerodivisors. For example, an invertible element is never a zerodivisor.
+Counter-intuitively, $0$ is a zerodivisor in every ring but the $0$-ring.
+More generally, if $M$ is an $A$-module, then $a \in A$ is a zerodivisor for
+$M$ if there is a nonzero $m \in M$ with $am = 0$. The other elements of $A$
+are called non-zerodivisors for $M$. Equivalently, and very usefully,
+$a \in A$ is a non-zerodivisor for $M$ if and only if $\times a: M \to M$ is
+an injection, or equivalently in the language of \S\emph{1.5}, if
+$$
+0 \longrightarrow M \xrightarrow{\times a} M
+$$
+is exact.)
+
+\begin{proof}
 	\begin{itemize}
         \item $(\Leftarrow)$: When $S$ contains no zerodivisors, we prove by
             contradiction: Assume that under the canonical ring map
@@ -170,11 +251,25 @@
 			$$
 			s(a_{1}-a_{2})=s\cdot d = 0
 			.$$ 
-			\qed
 	\end{itemize}
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+Verify that $A \rightarrow S^{-1}A$ satisfies the following universal
+property: $S^{-1}A$ is initial among A-algebras $B$ where every element of
+$S$ is sent to an invertible element in $B$. (Recall: the data of ``an
+A-algebra $B$'' and ``a ring map $A \rightarrow B$'' are the same.)
+Translation: any map $A \rightarrow B$ where every element of $S$ is sent to
+an invertible element must factor uniquely through $A \rightarrow S^{-1}A$.
+Another translation: a ring map out of $S^{-1}A$ is the same thing as a ring
+map from $A$ that sends every element of $S$ to an invertible element.
+Furthermore, an $S^{-1}A$-module is the same thing as an $A$-module for
+which $s \times \cdot : M \rightarrow M$ is an $A$-module isomorphism for
+all $s \in S$.
+
+\begin{proof}
 	Suppose
 	\begin{align*}
 		& f:A\mapsto B\\
@@ -193,10 +288,20 @@
         \\
 	.\end{align*}
 	And we can see $\psi( \frac{a}{s} )$ is uniquely defined!
-	\qed
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+Show that $\phi \colon M \to S^{-1}M$ exists, by constructing something
+satisfying the universal property. Hint: define elements of $S^{-1}M$ to be
+of the form $m/s$ where $m \in M$ and $s \in S$, and $m_1/s_1 = m_2/s_2$ if
+and only if for some $s \in S$, $s(s_2m_1 - s_1m_2) = 0$. Define the
+additive structure by $(m_1/s_1) + (m_2/s_2) = (s_2m_1 + s_1m_2)/(s_1s_2)$,
+and the $S^{-1}A$-module structure (and hence the $A$-module structure) is
+given by $(a_1/s_1) \cdot (m_2/s_2) = (a_1m_2)/(s_1s_2)$.
+
+\begin{proof}
 	We follow the hint from author: Define
 	$$
 	S^{-1}M= \left\{ \frac{m}{s}\mid m \in M,s \in S \right\} 
@@ -231,11 +336,27 @@
     Therefore we have $\varphi( \frac{m}{s} ) = \alpha(m) \alpha(s)^{-1}$. So
     the $\phi$ in the problem satisfy the uniqueness of universal property, so
     it exist.
-	\qed
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
-	\leavevmode \vspace{-\baselineskip}
+\begin{enumerate}[label=({\alph*})]
+\item Show that localization commutes with finite products, or
+    equivalently, with finite direct sums. In other words, if
+    $M_{1},\ldots,M_{n}$ are A-modules, describe an isomorphism (of
+    A-modules, and of $S^{-1}A$-modules)
+    $S^{-1}(M_{1}\times\cdots\times M_{n}) \to S^{-1}M_{1}\times\cdots\times
+    S^{-1}M_{n}$.
+\item Show that localization commutes with arbitrary direct sums.
+\item Show that ``localization does not necessarily commute with infinite
+    products'': the obvious map $S^{-1}(\prod_{i}M_{i}) \to \prod_{i}
+    S^{-1}M_{i}$ induced by the universal property of localization is not
+    always an isomorphism. (Hint:
+    $(1,1/2,1/3,1/4,\ldots)\in\mathbb{Q}\times\mathbb{Q}\times\cdots$)
+\end{enumerate}
+
+\begin{proof}
 	\begin{enumerate}
 		\item Intuitively, we can let
 			$$
@@ -261,9 +382,18 @@
             $S^{-1}\left( \bigotimes _{k \in I}M_{k} \right) $ since $p_{1},\
             p_{2},\ \ldots$ cannot have a shared denominator.
 	\end{enumerate}
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+EXERCISE (IF YOU HAVEN'T SEEN TENSOR PRODUCTS BEFORE).
+
+Show that $\mathbb{Z}/(10) \otimes_{\mathbb{Z}} \mathbb{Z}/(12) \cong
+\mathbb{Z}/(2)$. (This exercise is intended to give some hands-on practice
+with tensor products.)
+
+\begin{proof}
 	More generally, we'll prove that
 	$$
     \forall m,\ n \in \mathbb{Z}^{+},\ \mathbb{Z} / (m)
@@ -280,24 +410,71 @@
     k\cdot (1_{\mathbb{Z} / (m)} \otimes 1_{\mathbb{Z} / (n)})
 	.$$ 
 	And the proof can be done by Euclidean algorithm.
-	\qed
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}[Proved in \emph{Atiyah}]
+IMPORTANT EXERCISE: RIGHT-EXACTNESS OF $(\cdot)\otimes_{A}N$.
+
+Show that $(\cdot)\otimes_{A}N$ gives a covariant functor
+$\mod_{A}\to\mod_{A}$. Show that $(\cdot)\otimes_{A}N$ is a right-exact
+functor, i.e., if
+$$
+M^{\prime} \to M \to M^{\prime\prime} \to 0
+$$
+is an exact sequence of $A$-modules (which means $f\colon M\to M''$ is
+surjective, and $M'$ surjects onto the kernel of $f$; see \S\emph{1.5}),
+then the induced sequence
+$$
+M^{\prime} \otimes_{A} N \to M \otimes_{A} N \to M^{\prime\prime}
+\otimes_{A} N \to 0
+$$
+is also exact. This exercise is repeated in Exercise 1.5.G, but you may get
+a lot out of doing it now. (You will be reminded of the definition of
+right-exactness in \S\emph{1.5.6}.)
 \end{exercise}
 
 \begin{exercise}[Trivial]
+Show that $(T, t: M \times N \rightarrow T)$ is unique up to unique
+isomorphism. Hint: first figure out what ``unique up to unique isomorphism''
+means for such pairs, using a category of pairs $(T, t)$. Then follow the
+analogous argument for the product.
+
+\begin{proof}
     Because from the textbook content right above this question, we see any two
     maps $T,\ T'$ has a unique $A$-linear map to each other.
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+Show that the construction of \S\emph{1.2.5} satisfies the universal
+property of tensor product.
+
+\begin{proof}
     Because the construction in \S\emph{1.2.5} is a bilinear map, is unique up
     to isomorphism.
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
-	\leavevmode \vspace{-\baselineskip}
+IMPORTANT EXERCISE.
+
+\begin{enumerate}[label=({\alph*})]
+\item If $M$ is an $A$-module and $A \to B$ is a morphism of rings, give
+    $B \otimes_A M$ the structure of a $B$-module (this is part of the
+    exercise). Show that this describes a functor $\mod_A \to \mod_B$.
+\item (tensor product of rings) If further $A \to C$ is another morphism of
+    rings, show that $B \otimes_A C$ has a natural structure of a ring.
+    Hint: multiplication will be given by
+    $(b_1 \otimes c_1)(b_2 \otimes c_2) = (b_1 b_2) \otimes (c_1 c_2)$.
+    (Exercise 1.2.U will interpret this construction as a fibered
+    coproduct.)
+\end{enumerate}
+
+\begin{proof}
 	\begin{enumerate}
 		\item 
 			\begin{itemize}
@@ -336,9 +513,18 @@
 			.$$ 
 			And we can easily exam the properties to let it becomes a ring.
 	\end{enumerate}
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+IMPORTANT EXERCISE.
+
+If $S$ is a multiplicative subset of $A$ and $M$ is an $A$-module, describe
+a natural isomorphism $(S^{-1}A) \otimes_A M \stackrel{\sim}{\longrightarrow}
+S^{-1}M$ (as $S^{-1}A$-modules and as $A$-modules).
+
+\begin{proof}
 	We can define
 	$$
 	(S^{-1}A)\otimes _{A}M\longrightarrow S^{-1}M
@@ -349,27 +535,68 @@
 	.$$ 
     And we can easily check that it meets the requirement to become a
     isomorphism.
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+EXERCISE ($\otimes$ COMMUTES WITH $\oplus$).
+
+Show that tensor products commute with arbitrary direct sums: if $M$ and
+$\{N_{i}\}_{i\in I}$ are all A-modules, describe an isomorphism
+$$
+M \otimes (\oplus_{i \in I} N_{i}) \xrightarrow{\sim} \oplus_{i \in I}
+(M \otimes N_{i}).
+$$
+
+\begin{proof}
     Because $I$ only has finite nonzero elements, so the properties of tensor
     product can be verified easily.
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+EXERCISE (FIBERED PRODUCTS OF SETS).
+
+Show that in Sets,
+$$
+X \times_{Z} Y = \{(x, y) \in X \times Y: \alpha(x) = \beta(y)\}.
+$$
+More precisely, show that the right side, equipped with its evident maps to
+$X$ and $Y$, satisfies the universal property of the fibered product. (This
+will help you build intuition for fibered products.)
+
+\begin{proof}
 	It's because
 	$$
 	\alpha\circ\pr_{X} = \beta\circ\pr_{Y}
 	.$$ 
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+If $X$ is a topological space, show that fibered products always exist in
+the category of open sets of $X$, by describing what a fibered product is.
+(Hint: it has a one-word description.)
+
+\begin{solution}
     Intersection.
 
     Because morphisms are inclusion embeddings.
+\end{solution}
+
 \end{exercise}
 
 \begin{exercise}
+If $Z$ is the final object in a category $\mathcal{C}$, and
+$X, Y \in \mathcal{C}$, show that ``$X \times_{Z} Y = X \times Y$'': ``the''
+fibered product over $Z$ is uniquely isomorphic to ``the'' product. Assume
+all relevant (fibered) products exist. (This is an exercise about unwinding
+the definition.)
+
+\begin{proof}
 	Denote the natural maps
 	$$
 	\pr_{X}:X\times Y\longrightarrow X
@@ -390,9 +617,25 @@
 	.$$ 
     Which do work since $Z$ is a final diagram, from which we know, up to
     isomorphisms, has only a single morphism sending $X\times Y$ to $Z$.
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+USEFUL EXERCISE: TOWERS OF CARTESIAN DIAGRAMS ARE CARTESIAN DIAGRAMS.
+
+If the two squares in the following commutative diagram are Cartesian
+diagrams, show that the ``outside rectangle'' (involving $U$, $V$, $Y$, and
+$Z$) is also a Cartesian diagram.
+$$
+\begin{tikzcd}
+    U \arrow[r] \arrow[d] & V \arrow[d] \\
+    W \arrow[r] \arrow[d] & X \arrow[d] \\
+    Y \arrow[r] & Z
+\end{tikzcd}
+$$
+
+\begin{proof}
 	For notations, let
 	$$
 	\begin{tikzcd}
@@ -407,10 +650,18 @@
         &=h_2\circ f_2\circ g_1\\
 		&=f_3\circ g_2\circ g_1
 	.\end{align*}
-	\qed
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+Given morphisms $X_{1} \rightarrow Y$, $X_{2} \rightarrow Y$, and
+$Y \rightarrow Z$, show that there is a natural morphism $X_{1} \times_{Y}
+X_{2} \rightarrow X_{1} \times_{Z} X_{2}$, assuming that both fibered
+products exist. (This is trivial once you figure out what it is saying. The
+point of this exercise is to see why it is trivial.)
+
+\begin{proof}
 	$$
 	\begin{tikzcd}
         X_1\times_Y X_2 \arrow[rdd] \arrow[rrd] \arrow[rd, "\exists!" description, dotted] &                                       &                                   &   \\
@@ -428,9 +679,25 @@
 	.$$ 
     And by the definition of fibered product, there must exist a unqiue
     factoring map $X_1\times_{Y}X_2\longrightarrow X_{1}\times _{Z}X_2$.
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+IMPORTANT EXERCISE: THE DIAGONAL-BASE-CHANGE DIAGRAM.
+
+Suppose we are given morphisms $X_{1}, X_{2} \rightarrow Y$ and
+$Y \rightarrow Z$. Show that the following diagram is a Cartesian square.
+$$
+\begin{tikzcd}
+    X_1\times_Y X_2 \arrow[r] \arrow[d] & X_1\times_Z X_2 \arrow[d] \\
+    Y \arrow[r] & Y\times_Z Y
+\end{tikzcd}
+$$
+Assume all relevant (fibered) products exist. (If this exercise is too hard
+now, you can try it again at Exercise 1.3.B.)
+
+\begin{proof}
     \emph{(}$ Y\longrightarrow Y\times _{Z}Y $\emph{is defined by identical
     embedding)}
 	$$
@@ -456,9 +723,15 @@ X_1 \arrow[r]                       & Y \arrow[rd]  &   \\
                                                                                         &                                                                                 & Y \arrow[ru, Rightarrow,no head] \arrow[r] & Z          
     \end{tikzcd}
     $$
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+Show that coproduct for Sets is disjoint union. This is why we use the
+notation $\coprod$ for disjoint union.
+
+\begin{proof}
 	For
 	$$
 	\begin{tikzcd}
@@ -481,9 +754,26 @@ S_1 \arrow[r, "\varphi_1"] \arrow[ru, "\psi_1"] & S_1\sqcup S_2 \arrow[u, dotted
 	\Psi:(\cdot ,s_2)\longmapsto \psi_2(s_2)
 	.$$
 	Which is unique up to isomorphism while making the diagram commutes.
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+Suppose $A \to B$ and $A \to C$ are two ring morphisms, so in particular $B$
+and $C$ are $A$-modules. Recall (Exercise 1.2.K) that $B \otimes_A C$ has a
+ring structure. Show that there is a natural morphism $B \to B \otimes_A C$
+given by $b \mapsto b \otimes 1$. (This is not necessarily an inclusion; see
+Exercise 1.2.G.) Similarly, there is a natural morphism $C \to B \otimes_A
+C$. Show that this gives a fibered coproduct on rings, i.e., that
+$$
+\begin{tikzcd}
+    A \arrow[r] \arrow[d] & B \arrow[d] \\
+    C \arrow[r] & B \otimes_A C
+\end{tikzcd}
+$$
+satisfies the universal property of fibered coproduct.
+
+\begin{proof}
 	Denote
 	$$
 	\begin{tikzcd}
@@ -499,9 +789,14 @@ D &                                                       &                     
 	$$
 	\varphi(b\otimes (a\cdot c))=h(c)
 	$$ 
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+Show that the composition of two monomorphisms is a monomorphism.
+
+\begin{proof}
 	$$
 	\begin{tikzcd}
         A \arrow[d, "\leq1" description, dotted] \arrow[rd, "\leq1" description, dotted] \arrow[rrd] &                       &   \\
@@ -509,10 +804,19 @@ D &                                                       &                     
 	\end{tikzcd}
 	$$ 
 	From the graph we obtain the proof easily.
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
-    \leavevmode \vspace{-\baselineskip}
+Prove that a morphism $\pi\colon X\to Y$ is a monomorphism if and only if
+the fibered product $X\times_{Y}X$ exists, and the induced diagonal morphism
+$\delta_{\pi}\colon X\to X\times_{Y}X$ (Definition 1.2.7) is an
+isomorphism. We may then take this as the definition of monomorphism.
+(Monomorphisms aren't central to future discussions, although they will come
+up again. This exercise is just good practice.)
+
+\begin{proof}
     \begin{itemize}
     	\item 
             When $\pi$ is a monomorphism:
@@ -566,9 +870,21 @@ D &                                                       &                     
     $\alpha'\circ p=\beta'\circ p$, i.e. $\alpha=\beta$. $\pi$ satisfy the left
     cancellation law, so it's a monomorphism.
 	\end{itemize}
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+EASY EXERCISE.
+
+We use the notation of Exercise 1.2.R. Show that if $Y \rightarrow Z$ is a
+monomorphism, then the morphism $X_{1} \times_{Y} X_{2} \rightarrow X_{1}
+\times_{Z} X_{2}$ you described in Exercise 1.2.R is an isomorphism. (Hint:
+for any object $V$, give a natural bijection between maps from $V$ to the
+first and maps from $V$ to the second. It is also possible to use the
+Diagonal-Base-Change diagram, Exercise 1.2.S.)
+
+\begin{proof}
 	$$
 	\begin{tikzcd}
         X_1\times_YX_2 \arrow[rdd] \arrow[rrd] &                                    &               &   \\
@@ -598,9 +914,34 @@ X_1 \arrow[r]                      & Y
 	$$ 
     So $\varphi\circ \psi=\id_{X_1\times _{Z}X_2},\ \psi\circ
     \varphi=\id_{X_1\times _{Y}X_2}$.
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+IMPORTANT EXERCISE THAT YOU SHOULD DO ONCE IN YOUR LIFE (YONEDA'S LEMMA).
+
+\begin{enumerate}[label=({\alph*})]
+\item Suppose you have two objects $A$ and $A'$ in a category $\mathcal{C}$,
+    and maps
+    $$
+    i_{C} \colon \mor(C, A) \longrightarrow \mor(C, A')
+    $$
+    that commute with the maps (1.2.11.1). Show that the $i_C$ (as $C$
+    ranges over the objects of $\mathcal{C}$) are induced from a unique
+    morphism $g\colon A\to A'$. More precisely, show that there is a unique
+    morphism $g \colon A \to A'$ such that for all $C \in \mathcal{C}$,
+    $i_C$ is $u \mapsto g \circ u$.
+\item If furthermore the $i_C$ are all bijections, show that the resulting
+    $g$ is an isomorphism. (Hint for both: This is much easier than it
+    looks. This statement is so general that there are really only a couple
+    of things that you could possibly try. For example, if you're hoping to
+    find a morphism $A \to A'$, where will you find it? Well, you are
+    looking for an element $\mor(A, A')$. So just plug in $C = A$ to
+    (1.2.11.2), and see where the identity goes.)
+\end{enumerate}
+
+\begin{proof}
 	$$
 	\begin{tikzcd}
 B \arrow[rrdd] \arrow[dd]                                                    &                                                                               & A' \arrow[lldd, "h"', bend right, shift right=3] \arrow[loop, distance=2em, in=125, out=55] \\
@@ -631,25 +972,76 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
 			$$
 			\id_{A}=\id^{-1}(g)=h\circ g
 			$$ 
-			\qed
 	\end{enumerate}
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}[Skipped temporarily due to the star.]
+$\ast$EXERCISE.
+
+\begin{enumerate}[label=({\alph*})]
+\item Suppose $A$ and $B$ are objects in a category $\mathcal{C}$. Give a
+    bijection between the natural transformations $h^A \to h^B$ of covariant
+    functors $\mathcal{C} \to Sets$ (see Example 1.1.14 for the definition)
+    and the morphisms $B \to A$.
+\item State and prove the corresponding fact for contravariant functors
+    $h_{A}$ (see Example 1.1.20). Remark: A contravariant functor $F$ from
+    $\mathcal{C}$ to Sets is said to be representable if there is a natural
+    isomorphism
+    $$
+    \xi \colon F \xrightarrow{\sim} h_{A}.
+    $$
+    Thus the representing object $A$ is determined up to unique isomorphism
+    by the pair $(F, \xi)$. There is a similar definition for covariant
+    functors. (We will revisit this in \S\emph{7.6}, and this problem will
+    appear again as Exercise 7.6.C. The element $\xi^{-1}(\mathrm{id}_A) \in
+    F(A)$ is often called the ``universal object''; do you see why?)
+\item Yoneda's Lemma. Suppose $F$ is a covariant functor $\mathcal{C} \to
+    Sets$, and $A \in \mathcal{C}$. Give a bijection between the natural
+    transformations $h^A \to F$ and $F(A)$. (The corresponding fact for
+    contravariant functors is essentially Exercise 10.1.B.)
+\end{enumerate}
+
+\begin{proof}
 	\begin{enumerate}
         \item We consider the contravariant functors of the morphisms
             $B\longrightarrow A$.
 		\item 
 	\end{enumerate}
+\end{proof}
+
 \end{exercise}
 
 \section{Limits and colimits}
 \begin{exercise}[Trivial]
+EXERCISE (REALITY CHECK).
+
+Suppose that the partially ordered set $I$ has an initial object $e$. Show
+that the limit of any diagram indexed by $I$ exists.
+
+\begin{proof}
     Since $\mathscr{I}$ is a partially ordered set, there's at most one morphism
     for any two object in $\mathscr{I}$. 
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+EXERCISE: THE DIAGONAL-BASE-CHANGE DIAGRAM, AGAIN.
+
+Solve 1.2.S again by identifying both $X_{1} \times_{Y} X_{2}$ and
+$Y \times_{(Y \times_{Z} Y)} (X_{1} \times_{Z} X_{2})$ as the limit of the
+diagram
+$$
+\begin{tikzcd}
+    X_1 \arrow[rd] & & X_2 \arrow[ld] \\
+    & Y \arrow[d] & \\
+    & Z &
+\end{tikzcd}
+$$
+
+\begin{proof}
 	$$
 	\begin{tikzcd}
         X_1\times_ZX_2 \arrow[rd, dotted] \arrow[rdd] \arrow[rrd] &                                    &                                   &   \\
@@ -681,10 +1073,26 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
 	Y\times _{(Y\times _{Z}Y)}(X_1\times _{Z}X_2)\rightarrow Z=
 	Y\times _{(Y\times _{Z}Y)}(X_1\times _{Z}X_2)\rightarrow Y\rightarrow Z
 	$$ 
-	\qed
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+IMPORTANT EXERCISE.
+
+Show that in the category Sets,
+$$
+\left\{(a_{i})_{i \in \mathscr{I}} \in \prod_{i} A_{i}: F(m)(a_{j}) =
+a_{k} \text{ for all } m \in \mor_{\mathscr{I}}(j, k) \subset
+\mor(\mathscr{I})\right\},
+$$
+along with the obvious projection maps to each $A_{i}$, is the limit
+$\lim_{\mathcal{I}} A_{i}$.
+
+This clearly also works in the category $\mod_{A}$ of A-modules (in
+particular $Vec_{k}$ and Ab), as well as Rings.
+
+\begin{proof}
 	$$
 	\begin{tikzcd}
         (a_i)_{i\in \mathscr{I}} \arrow[d] \arrow[rd] &     \\
@@ -697,32 +1105,91 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
 	$$ 
     So $(a_{i})_{i\in \mathscr{I}}A\longrightarrow A_{j}\longrightarrow A_{k}$
     commutes with $(a_{i})_{i\in \mathscr{I}}\longrightarrow A_{k}$.
-	\qed
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
-	\leavevmode \vspace{-\baselineskip}
+\begin{enumerate}[label=({\alph*})]
+\item Interpret the statement ``$\mathbb{Q} = \text{colim} \frac{1}{n}
+    \mathbb{Z}$''.
+\item Interpret the union of some subsets of a given set as a colimit.
+    (Dually, the intersection can be interpreted as a limit.) The objects of
+    the category in question are the subsets of the given set.
+\end{enumerate}
+
+\begin{solution}
 	\begin{enumerate}
         \item It means fractions converting into different denominators stands
             for the same rational number, which is obviously true.
         \item Because we can view the set category as posets, where morphisms in
             between two objects are unique.
 	\end{enumerate}
+\end{solution}
+
 \end{exercise}
 
 \begin{exercise}
+Suppose $\mathcal{I}$ is filtered. (We will almost exclusively use the case
+where $\mathcal{I}$ is a filtered set.) Recall the symbol $\coprod$ for
+disjoint union of sets. Show that any diagram in Sets indexed by
+$\mathcal{I}$ has the following, with the obvious maps to it, as a colimit:
+$$
+\left\{(a_{i}, i) \in \coprod_{i \in \mathscr{I}} A_{i}\right\} /
+\{(a_{i}, i) \sim (a_{j}, j) \text{ if and only if there are } f \colon
+A_{i} \to A_{k} \text{ and } g \colon A_{j} \to A_{k} \text{ in the diagram
+for which } f(a_{i}) = g(a_{j}) \text{ in } A_{k}\}
+$$
+(You will see that the ``filtered'' hypothesis is there to ensure that
+$\sim$ is an equivalence relation.)
+
+\begin{proof}
 	The proof is done by definition.
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+Verify that the A-module described above is indeed the colimit. (Make sure
+you verify that addition is well-defined, i.e., is independent of the choice
+of representatives $m_{i}$ and $m_{j}$, the choice of $\ell$, and the choice
+of arrows $u$ and $v$. Similarly, make sure that scalar multiplication is
+well-defined.)
+
+\begin{proof}
     \emph{(Trivial, skipped.)}
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+USEFUL EXERCISE (LOCALIZATION AS A COLIMIT).
+
+Generalize Exercise 1.3.D(a) to interpret localization of an integral
+domain as a colimit over a filtered set: suppose $S$ is a multiplicative set
+of $A$, and interpret $S^{-1}A = \text{colim} \frac{1}{s} A$ where the
+colimit is over $s \in S$, and in the category of $A$-modules. (Aside: Can
+you make some version of this work even if $A$ isn't an integral domain,
+e.g., $S^{-1}A = \text{colim} A_s$? This will work in the category of
+$A$-algebras.)
+
+\begin{proof}
 	\emph{(The proof is similar to \textbf{1.3.D} I'll skip.)}
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+EXERCISE: COLIMITS OF A-MODULES WITHOUT THE FILTERED CONDITION.
+
+Suppose you are given a diagram of A-modules indexed by $\mathscr{I}$:
+$F: \mathscr{I} \to Mod_A$, where we let $M_i := F(i)$. Show that the
+colimit is $\oplus_{i \in \mathscr{I}} M_i$ modulo the relations
+$m_i - F(n)(m_i)$ for every $n: i \to j$ in $\mathscr{I}$ (i.e., for every
+arrow in the diagram). (Somewhat more precisely: ``modulo'' means
+``quotiented by the submodule generated by''.)
+
+\begin{proof}
     \emph{(Trivial, skipped.)}
     $$
         \begin{tikzcd}
@@ -730,19 +1197,41 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
         M_i \arrow[u]                 & M_j \arrow[lu] \arrow[l]
         \end{tikzcd}
     $$
+\end{proof}
+
 \end{exercise}
 
 \section{Adjoints}
 \begin{exercise}
+Write down what this diagram should be.
+
+\begin{solution}
     $$
         \begin{tikzcd}
             {\mor_{\mathscr{B}}(F(A),B)} \arrow[r, "g^*"] \arrow[d, "\tau_{\mathcal{AB}}"] & {\mor_{\mathscr{B}}(F(A),B')} \arrow[d, "\tau_{\mathcal{AB'}}"] \\
             {\mor_{\mathscr{A}}(A,G(B))} \arrow[r, "Gg^*"]                                 & {\mor_{\mathscr{A}}(A,G(B'))}                                  
         \end{tikzcd}
     $$
+\end{solution}
+
 \end{exercise}
 
 \begin{exercise}
+Show that the map $\tau_{AB}$ (1.4.0.1) has the following properties. For
+each $A$ there is a map $\eta_{A}: A \to \mathrm{GF}(A)$ so that for any
+$g: F(A) \to B$, the corresponding $\tau_{AB}(g): A \to G(B)$ is given by
+the composition
+$$
+A \xrightarrow{\eta_{A}} GF(A) \xrightarrow{Gg} G(B).
+$$
+Similarly, there is a map $\epsilon_{B}\colon FG(B)\to B$ for each $B$ so
+that for any $f\colon A\to G(B)$, the corresponding map
+$\tau_{AB}^{-1}(f)\colon F(A)\to B$ is given by the composition
+$$
+F(A) \xrightarrow{Ff} FG(B) \xrightarrow{\epsilon_{B}} B.
+$$
+
+\begin{proof}
     Use the natural property: For all $g:B'\longrightarrow B$, we have
     $$
         \begin{tikzcd}
@@ -766,10 +1255,16 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
     Let $\eta_{A}=\tau_{AF(A)}(\id_{F(A)})$ and we're done.
 
     On the other hand: vice versa.
-    \qed
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+Suppose $M$, $N$, and $P$ are A-modules (where $A$ is a ring). Describe a
+bijection $\hom_{A}(M \otimes_{A} N, P) \leftrightarrow \hom_{A}(M,
+\hom_{A}(N, P))$. (Hint: try to use the universal property of $\otimes$.)
+
+\begin{proof}
     For $\forall \beta\in \bil{\left( M,N;P \right) }$, we may define
     $$
     f:M\longrightarrow \hom_{A}{\left( N,P \right)}
@@ -790,10 +1285,17 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
     i.e. $\beta\left( m,n \right) =f\left( m \right) \left( n \right)$.
 
     This defines the bijection.
-    \qed
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+EXERCISE (TENSOR-HOM ADJUNCTION).
+
+Show that $(\cdot)\otimes_{A}N$ and $\hom_{A}(N,\cdot)$ are adjoint
+functors.
+
+\begin{proof}
     Define $F,G$ to be the functor $(\cdot)\otimes _{A}N,\hom_{A}(N,\cdot)$
     respectively. We need to prove those $\tau_{XY}$ are natual, i.e. for
     $\forall \varphi:M\longrightarrow M',\psi:P\longrightarrow P'$
@@ -812,11 +1314,22 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
     $$
     commutes.
     This is obvious when we consider the proeprty of homomorphisms.
-    \qed
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
-    \leavevmode \vspace{-\baselineskip}
+Suppose $B \rightarrow A$ is a morphism of rings. If $M$ is an $A$-module,
+you can create a $B$-module $M_{B}$ by considering it as a $B$-module. This
+gives a functor $\cdot_{B}: Mod_{A} \rightarrow Mod_{B}$. Show that this
+functor is right-adjoint to $\cdot \otimes_{B} A$. In other words, describe
+a bijection
+$$
+\hom_{A}(N \otimes_{B} A, M) \cong \hom_{B}(N, M_{B})
+$$
+functorial in both arguments. (This adjoint pair is very important.)
+
+\begin{proof}
     \begin{enumerate}[label=({\Roman*})]
         \item 
             $\tau_{NM}$:
@@ -868,17 +1381,62 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
             Pick a homomorphism from the start, then track it through the
             diagram directly and we're done.
     \end{enumerate}
-    \qed
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}[Trivial]
+EXERCISE (AN ABELIAN GROUP IS GROUPIFIED BY ITSELF).
+
+Show that if an abelian semigroup is already a group then the identity
+morphism is the groupification. (More correct: the identity morphism is a
+groupification.) Note that you don't need to construct groupification (or
+even know that it exists in general) to solve this exercise.
 \end{exercise}
 
 \begin{exercise}[Follow the hint, trivial]
+Construct the ``groupification functor'' $H$ from the category of nonempty
+abelian semigroups to the category of abelian groups. (One possible
+construction: given an abelian semigroup $S$, the elements of its
+groupification $H(S)$ are ordered pairs $(a, b) \in S \times S$, which you
+may think of as $a - b$, with the equivalence that $(a, b) \sim (c, d)$ if
+$a + d + e = b + c + e$ for some $e \in S$. Describe addition in this
+group, and show that it satisfies the properties of an abelian group.
+Describe the abelian semigroup map $S \to H(S)$.) Let $F$ be the forgetful
+functor from the category of abelian groups Ab to the category of abelian
+semigroups. Show that $H$ is left-adjoint to $F$.
+
+\begin{solution}
     \emph{(It's just like constructing a fraction field of a ring.)}
+\end{solution}
+
 \end{exercise}
 
 \begin{exercise}
+EXERCISE (CF. EXERCISE 1.4.E).
+
+The purpose of this exercise is to give you more practice with ``left
+adjoints of forgetful functors'', the means by which we get abelian groups
+from abelian semigroups, and sheaves from presheaves. Suppose $A$ is a ring,
+and $S$ is a multiplicative subset. Then $S^{-1}A$-modules are a full
+subcategory (\S\emph{1.1.15}) of the category of A-modules (via the obvious
+inclusion $\mod_{S^{-1}A} \hookrightarrow \mod_{A}$). Then $\mod_{A} \to
+\mod_{S^{-1}A}$ can be interpreted as an adjoint to the forgetful functor
+$\mod_{S^{-1}A} \to \mod_{A}$. State and prove the correct statements.
+
+(Here is the larger story. Every $S^{-1}A$-module is an $A$-module, and this
+is an injective map, so we have a forgetful functor $F: \mod_{S^{-1}A} \to
+\mod_{A}$. In fact this is a fully faithful functor: it is injective on
+objects, and the morphisms between any two $S^{-1}A$-modules as $A$-modules
+are just the same when they are considered as $S^{-1}A$-modules. Then there
+is a functor $G: \mod_{A} \to \mod_{S^{-1}A}$, which might reasonably be
+called ``localization with respect to $S$'', which is left-adjoint to the
+forgetful functor. Translation: If $M$ is an $A$-module, and $N$ is an
+$S^{-1}A$-module, then $\mor(GM, N)$ (morphisms as $S^{-1}A$-modules, which
+are the same as morphisms as $A$-modules) are in natural bijection with
+$\mor(M, FN)$ (morphisms as $A$-modules).)
+
+\begin{proof}
     From \textbf{Exercise 1.4.E}, for ring homomorphism
     $$
     A\longrightarrow S^{-1}A
@@ -888,14 +1446,43 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
     \hom_{S^{-1}A}\left( S^{-1}N,M \right) \cong \hom_{A}\left( N,M_{A} \right) 
     $$
     \emph{(I suppose the rest is trivial.)}
+\end{proof}
+
 \end{exercise}
 
 \section{An introduction to abelian categories}
 
 \begin{exercise}[Trivial]
+Describe exact sequences
+$$
+0 \longrightarrow \im f^{i} \longrightarrow A^{i+1} \longrightarrow
+\coker f^{i} \longrightarrow 0
+$$
+$$
+0 \longrightarrow H^{i}(A^{\bullet}) \longrightarrow \coker f^{i-1}
+\longrightarrow \im f^{i} \longrightarrow 0
+$$
+(These are somehow dual to (1.5.6.3). In fact in some mirror universe this
+might have been given as the standard definition of homology.) Assume the
+category is that of modules over a fixed ring for convenience, but be aware
+that the result is true for any abelian category.
 \end{exercise}
 
 \begin{exercise}
+EXERCISE AND IMPORTANT DEFINITION.
+
+Suppose
+$$
+0 \xrightarrow{d^{0}} A^{1} \xrightarrow{d^{1}} \dots \xrightarrow{d^{n-1}}
+A^{n} \xrightarrow{d^{n}} 0
+$$
+is a complex of finite-dimensional k-vector spaces (often called
+$A^{\bullet}$ for short). Define $h^i(A^{\bullet}) := \dim H^i(A^{\bullet})$.
+Show that $\sum (-1)^i \dim A^i = \sum (-1)^i h^i(A^{\bullet})$. In
+particular, if $A^{\bullet}$ is exact, then $\sum (-1)^i \dim A^i = 0$. (If
+you haven't dealt much with cohomology, this will give you some practice.)
+
+\begin{proof}
     \begin{align*}
         \sum_{i=1}^{n} \left( -1 \right) ^{i}\dim{A^{i}}
         &= \sum_{i=1}^{n} \left( -1 \right)^{i}\left(
@@ -904,16 +1491,53 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
         \dim{\ker{f^{i}}}-\dim{\im{f^{i-1}}} \right) \\
         &= \sum_{i=1}^{n} \left( -1 \right) ^{i}h^{i}\left( A^{\bullet } \right)
     \end{align*}
-    \qed
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+IMPORTANT EXERCISE.
+
+Suppose $\mathcal{C}$ is an abelian category. Define the category
+$Com_{\mathcal{C}}$ of complexes as follows. The objects are infinite
+complexes
+$$
+A^{\bullet}: \quad \dots \longrightarrow A^{i-1} \xrightarrow{f^{i-1}}
+A^{i} \xrightarrow{f^{i}} A^{i+1} \xrightarrow{f^{i+1}} \dots
+$$
+in $\mathcal{C}$, and the morphisms $A^{\bullet} \to B^{\bullet}$ are
+commuting diagrams
+$$
+\begin{tikzcd}
+    \cdots \arrow[r] \arrow[d] & A^{i} \arrow[r, "f^{i}"] \arrow[d] & A^{i+1} \arrow[r] \arrow[d] & \cdots \arrow[d] \\
+    \cdots \arrow[r] & B^{i} \arrow[r, "g^{i}"] & B^{i+1} \arrow[r] & \cdots
+\end{tikzcd}
+$$
+Show that $Com_{\mathcal{C}}$ is an abelian category.
+
+Feel free to deal with the special case of modules over a fixed ring.
+(Remark for experts: Essentially the same argument shows that
+$\mathcal{C}^{\mathcal{I}}$ is an abelian category for any small category
+$\mathcal{I}$ and any abelian category $\mathcal{C}$. This immediately
+implies that the category of presheaves on a topological space $X$ with
+values in an abelian category $\mathcal{C}$ is automatically an abelian
+category, cf. \S\emph{2.3.5}.)
+
+\begin{proof}
     This is obtained immediately from $\mathscr{C}$ being abelian category.
-    \qed
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
-    \leavevmode \vspace{-\baselineskip}
+IMPORTANT EXERCISE.
+
+Show that (1.5.6.5) induces a map of homology $H^{i}(A^{\bullet}) \to
+H^{i}(B^{\bullet})$. Show furthermore that $H^{i}$ is a covariant functor
+$Com_{C} \to C$. (Again, feel free to deal with the special case
+$\mod_{A}$.)
+
+\begin{proof}
     \begin{enumerate}[label=({\roman*})]
         \item 
             By (1.5.6.3) we know any chain complex
@@ -952,10 +1576,14 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
         \item 
             \emph{(I think it's trivial.)}
     \end{enumerate}
-    \qed
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+Show that two homotopic maps give the same map on homology.
+
+\begin{proof}
     $$
     \begin{tikzcd}
     \ldots \arrow[r] & C^{i-1} \arrow[r, "d_{C}^{i-1}"] \arrow[d, bend right] \arrow[d, bend left] \arrow[ld] & C^{i} \arrow[r, "d_{C}^{i}"] \arrow[d, bend right] \arrow[d, bend left] \arrow[ld] & C^{i+1} \arrow[r, "d_{C}^{i+1}"] \arrow[d, bend right] \arrow[d, bend left] \arrow[ld] & \ldots \arrow[ld] \\
@@ -965,15 +1593,42 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
     
     This is euqivalent to prove $f-g$ is gives the zero mapping on homology,
     i.e. $dw-wd$ gives the zero mapping on homology, which is trivial.
-    \qed
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}[Trivial]
+Suppose $F$ is an exact functor. Show that applying $F$ to an exact
+sequence preserves exactness. For example, if $F$ is covariant, and
+$A' \rightarrow A \rightarrow A''$ is exact, then $FA' \rightarrow FA
+\rightarrow FA''$ is exact. (This will be generalized in Exercise 1.5.I(c).)
+
+\begin{proof}
     \emph{(Just decompose those sequences)}
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
-    \leavevmode \vspace{-\baselineskip}
+Suppose $A$ is a ring, $S \subset A$ is a multiplicative subset, and $M$ is
+an $A$-module.
+
+\begin{enumerate}[label=({\alph*})]
+\item Show that localization of $A$-modules $\mod_{A} \to \mod_{S^{-1}A}$
+    is an exact covariant functor.
+\item Show that $(\cdot) \otimes_{A} M$ is a right-exact covariant functor
+    $\mod_{A} \to \mod_{A}$. (This is a repeat of Exercise 1.2.H.)
+\item Show that $\hom(M,\cdot)$ is a left-exact covariant functor
+    $\mod_{A} \to \mod_{A}$. If $\mathcal{C}$ is any abelian category, and
+    $C \in \mathcal{C}$, show that $\hom(C,\cdot)$ is a left-exact covariant
+    functor $\mathcal{C} \to Ab$.
+\item Show that $\hom(\cdot, M)$ is a left-exact contravariant functor
+    $\mod_{A} \to \mod_{A}$. If $C$ is any abelian category, and
+    $C \in C$, show that $\hom(\cdot, C)$ is a left-exact contravariant
+    functor $C \to Ab$.
+\end{enumerate}
+
+\begin{proof}
     \begin{enumerate}[label=({\alph*})]
         \item 
             Trivial.
@@ -996,9 +1651,29 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
             \item 
             \end{enumerate}
     \end{enumerate}
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+Suppose $M$ is a finitely presented $A$-module: $M$ has a finite number of
+generators, and with these generators it has a finite number of relations;
+or usefully equivalently, fits in an exact sequence
+$$
+A^{\oplus q} \longrightarrow A^{\oplus p} \longrightarrow M \longrightarrow
+0.
+$$
+Use (1.5.9.1) and the left-exactness of Hom to describe an isomorphism
+$$
+S^{-1}\hom_{A}(M, N) \stackrel{\sim}{\leftrightarrow}
+\hom_{S^{-1}A}(S^{-1}M,
+S^{-1}N).
+$$
+(You might be able to interpret this in light of a variant of Exercise
+1.5.I below, for left-exact contravariant functors rather than right-exact
+covariant functors.)
+
+\begin{proof}
     First, by
     $$
     A^{\bigoplus q}\longrightarrow A^{\bigoplus p}\longrightarrow
@@ -1051,10 +1726,42 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
     \left( S^{-1}N \right) ^{\bigoplus{r}}\cong 
     S^{-1}\hom_{A}{(M^{\bigoplus{r}},N)}
     .$$
-    \qed
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}[Beautiful!]
+IMPORTANT EXERCISE (THE FHHF THEOREM).
+
+This result can take you far, and perhaps for that reason it has sometimes
+been called the Fernbahnhof (FernbaHnHoF) Theorem, notably in [Vak1, Exer.
+1.5.I]. Suppose $F: \mathcal{A} \to \mathcal{B}$ is a covariant functor of
+abelian categories, and $C^{\bullet}$ is a complex in $\mathcal{A}$.
+
+\begin{enumerate}[label=({\alph*})]
+\item (F right-exact yields $FH^{\bullet} \longrightarrow H^{\bullet}F$)
+    If $F$ is right-exact, describe a natural morphism $FH^{\bullet}
+    \rightarrow H^{\bullet}F$. (More precisely, for each $i$, the left side
+    is $F$ applied to the cohomology at piece $i$ of $C^{\bullet}$, while
+    the right side is the cohomology at piece $i$ of $FC^{\bullet}$.)
+\item (F left-exact yields $FH^{\bullet} \leftarrow H^{\bullet}F$) If $F$
+    is left-exact, describe a natural morphism $H^{\bullet}F \rightarrow
+    FH^{\bullet}$.
+\item (F exact yields $FH^{\bullet} \xleftarrow{\sim} H^{\bullet}F$) If $F$
+    is exact, show that the morphisms of (a) and (b) are inverses and thus
+    isomorphisms.
+\end{enumerate}
+
+Hint for (a): use $C^i \xrightarrow{d^i} C^{i+1} \longrightarrow
+\text{coker } d^i \longrightarrow 0$ to give an isomorphism $F \text{coker }
+d^i \stackrel{\sim}{\leftrightarrow} \text{coker } F d^i$. Then use the first line of
+(1.5.6.4) to give an epimorphism $F \text{im } d^i \twoheadrightarrow
+\text{im } F d^i$. Then use the second line of (1.5.6.4) to give the
+desired map $FH^i C^\bullet \to H^i FC^\bullet$. While you are at it, you
+may as well describe a map for the fourth member of the quartet {coker, im,
+H, ker}: $F \text{ker } d^i \to \text{ker } F d^i$.
+
+\begin{proof}
     \emph{(Note that in homological algebra, it's a consequence that every left,
     right exact, or exact, functor being additive. Therefore it's well-defined
     to write} $H^{\bullet}F$\emph{.)}
@@ -1155,11 +1862,25 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
             $$
             \alpha\circ \beta=\id
             $$
-            \qed
     \end{enumerate}
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
+EXERCISE (Kernels COMMUTE WITH LIMITS).
+
+Suppose $\mathcal{C}$ is an abelian category, and $a\colon \mathcal{I} \to
+\mathcal{C}$ and $b\colon \mathcal{I} \to \mathcal{C}$ are two diagrams in
+$\mathcal{C}$ indexed by $\mathcal{I}$. For convenience, let $A_i = a(i)$
+and $B_i = b(i)$ be the objects in those two diagrams. Let $h_i\colon A_i
+\to B_i$ be maps commuting with the maps in the diagram. (Translation: $h$
+is a natural transformation of functors $a \to b$, see \S\emph{1.1.21}.)
+Then the $\ker h_i$ form another diagram in $\mathcal{C}$ indexed by
+$\mathcal{I}$. Describe a canonical isomorphism $\lim \ker h_i
+\xleftarrow{\sim} \ker(\lim A_i \to \lim B_i)$, assuming the limits exist.
+
+\begin{proof}
     Chase the diagrams and obtain those commute diagrams:
     $$
     \begin{tikzcd}
@@ -1177,11 +1898,14 @@ A \arrow[rruu, "g"', bend right] \arrow[loop, distance=2em, in=305, out=235] & {
     \ker{(\lim{A_i}\rightarrow\lim{B_i})} \arrow[uu]                       &                                                               &                         &              
     \end{tikzcd}
     $$
-    \qed
+\end{proof}
+
 \end{exercise}
 
 \begin{exercise}
-    
+Make sense of the statement that ``limits commute with limits'' in a
+general category, and prove it. (Hint: recall that kernels are limits. The
+previous exercise should be a corollary of this one.)
 \end{exercise}
 
 \end{document}
