@@ -2,7 +2,6 @@
 \usepackage{geometry}
 \geometry{a4paper,scale=0.8}
 \usepackage[utf8]{inputenc}
-
 \usepackage{amsmath, amssymb}
 \usepackage{amsthm}
 \usepackage{enumitem}
@@ -29,6 +28,10 @@
 \newtheorem{definition}{Definition}[section]
 \newtheorem{lemma}{Lemma}[section]
 
+\newenvironment{solution}
+  {\begin{proof}[Solution.]\renewcommand{\qedsymbol}{}}
+  {\end{proof}}
+
 \DeclareMathOperator{\id}{Id}
 \DeclareMathOperator{\mor}{Mor}
 \DeclareMathOperator{\coker}{Coker}
@@ -40,14 +43,8 @@
 \DeclareMathOperator{\colim}{Colim}
 \let\hom\relax
 \DeclareMathOperator{\hom}{Hom}
-\let\mod\relax
-\DeclareMathOperator{\mod}{Mod}
-\DeclareMathOperator{\pr}{pr}
-\DeclareMathOperator{\bil}{Bil}
-\let\dim\relax
-\DeclareMathOperator{\dim}{Dim}
-\let\gcd\relax
-\DeclareMathOperator{\gcd}{Gcd}
+\DeclareMathOperator{\res}{Res}
+\DeclareMathOperator{\pre}{pre}
 
 \title{Chapter 2 - Sheaves}
 \author{Flandre}
@@ -69,7 +66,6 @@ element of $O_{p} \setminus m_{p}$ is invertible.)
     \left( \frac{1}{f}, U'\right)\in \mathscr{O}_{p}\backslash \mathfrak{m}_{p}
     $$
     in a neighbourhood $U'$ of $p$, hence invertible.
-    \qed
 \end{proof}
 
 \end{exercise}
@@ -93,6 +89,356 @@ Given any topological space X, we have a “category of open sets” (Example
 Verify that the data of a presheaf is precisely the data of a contravariant
 functor from the category of open sets of X to the category of sets. (This
 interpretation is surprisingly useful.)  
+\end{exercise}
+
+\begin{exercise}
+UNIMPORTANT EXERCISE: PRESHEAVES THAT ARE NOT SHEAVES.
+
+Show that the following are presheaves on $\mathbb{C}$ (with the classical
+topology), but not sheaves: (a) bounded functions, (b) holomorphic functions
+admitting a holomorphic square root.
+
+\begin{proof}
+    \begin{enumerate}[label=({\alph*})]
+        \item 
+            Define
+            $$
+            \mathscr{F}\left( U \right) =\left\{ f:U\longrightarrow
+            \mathbb{C}\mid f\text{ is bounded in } U \right\} 
+            $$
+            Obviously $\mathscr{F}$ forms a presheave.
+
+            Now consider
+            $$
+            U_{n}=\left\{ z\in \mathbb{C}\mid \left| z \right| \le n \right\}
+            ,n=1,2,3,\ldots 
+            $$
+            and define $f_{n}\in \mathscr{F}\left( U_{n} \right) $ by
+            $$
+            f_{n}\left( z \right) =z
+            $$
+            obviously the corresponding glued $f$ cannot be bounded, hence not
+            in $\mathscr{F}$.
+        \item \textbf{(Skipped. I've forgotted the theories in complex
+            analysis.)}
+    \end{enumerate}
+\end{proof}
+
+\end{exercise}
+
+\begin{exercise}
+The identity and gluability axioms may be interpreted as saying that
+$\mathcal{F}(\cup_{i\in I}U_{i})$ is a certain limit. What is that limit?
+
+\begin{solution}
+    It's $\mathscr{F}(U)$.
+\end{solution}
+
+\end{exercise}
+
+\begin{exercise}[Trivial]
+(a) Verify that the examples of §2.1 are indeed sheaves (of smooth functions, or
+continuous functions, or real-analytic functions, or plain real-valued
+functions, on a manifold or $\mathbb{R}^n$ ).  
+
+(b) Show that real-valued continuous functions on (open sets of) a topological
+space X form a sheaf.
+\end{exercise}
+
+\begin{exercise}
+(CONSTANT SHEAVES).
+
+Now let $\mathcal{F}(\mathsf{U})$ be the set of maps $\mathsf{U} \to \mathsf{S}$
+that are locally constant, i.e., for any point $\mathsf{p}$ in $\mathsf{U}$ ,
+there is an open neighborhood of $\mathsf{p}$ where the function is constant.
+Show that this is a sheaf. (A better description is this: endow $S$ with the
+discrete topology, and let $\mathcal{F}(\mathsf{U})$ be the continuous maps
+$\mathsf{U} \to \mathsf{S}$ .) This is called the constant sheaf (with values in
+$S$ ); do not confuse it with the constant presheaf. (I would prefer the name
+"locally constant sheaf", but it is too late in history for this change.) We
+denote this sheaf $\underline{\mathsf{S}}$ .
+
+\begin{proof}
+    \emph{(I suppose it's trivial, because the gluability is satisfied in this
+    case.)}
+\end{proof}
+
+\end{exercise}
+
+\begin{exercise}[Trivial]
+("MORPHISMS GLUE").
+
+Suppose Y is a topological space. Show that "continuous maps to Y" form a sheaf
+of sets on X. More precisely, to each open set U of X, we associate the set of
+continuous maps of U to Y. Show that this forms a sheaf. (Exercise 2.2.D(b),
+with Y = R, and Exercise 2.2.E, with Y = S with the discrete topology, are both
+special cases.)
+\end{exercise}
+
+\begin{exercise}
+This is a fancier version of the previous exercise.
+
+(a) (sheaf of sections of a map) Suppose we are given a continuous map $\mu: Y
+\to X$ . Show that “sections of $\mu$ ” form a sheaf. More precisely, to each
+open set $U$ of $X$ , associate the set of continuous maps $s: U \to Y$ such
+that $\mu \circ s = id|_{U}$ . Show that this forms a sheaf. (For those who have
+heard of vector bundles, these are a good example.) This is motivation for the
+phrase “section of a sheaf”.
+
+(b) (This exercise is for those who know what a topological group is. If you
+don't know what a topological group is, you might be able to guess.) Suppose
+that $Y$ is a topological group. Show that continuous maps to $Y$ form a sheaf
+of groups.
+
+\begin{proof}
+    \begin{enumerate}[label=({\alph*})]
+        \item 
+            \emph{(Trivial)}.
+        \item 
+            \emph{(The same as \textbf{Exercise 2.2.F.})}.
+    \end{enumerate}
+\end{proof}
+
+\end{exercise}
+
+\begin{exercise}[Trivial]
+IMPORTANT EXERCISE/DEFINITION: THE PUSHFORWARD SHEAF OR DIRECT IMAGE SHEAF.
+
+Suppose $\pi\colon X \to Y$ is a continuous map, and F is a presheaf on X. Then
+define a presheaf $\pi_{*}F$ on Y by $\pi_{*}F(V) = \mathcal{F}(\pi^{-1}(V))$ ,
+where V is an open subset of Y. Show that $\pi_{*}F$ is a presheaf on Y, and is
+a sheaf if F is. This is called the pushforward (or direct image) of F. More
+precisely, $\pi_{*}F$ is called the pushforward of F by $\pi$ .
+\end{exercise}
+
+\begin{exercise}
+(PUSHFORWARD INDUCES MAPS OF STALKS).
+
+Suppose $\pi: X \to Y$ is a continuous map, and $\mathcal{F}$ is a sheaf of sets
+(or rings or $\lambda$ -modules) on $X$ . If $\pi(p) = q$ , describe the natural
+morphism of stalks $(\pi_*\mathcal{F})_q \to \mathcal{F}_p$ . (You can use the
+explicit definition of stalk using representatives, §2.2.4, or the universal
+property, §2.2.5. If you prefer one way, you should try the other.)
+
+\begin{solution}
+    Notice
+    $$
+    \begin{tikzcd}
+                                                       & \mathscr{F}_{p}                                        \\
+                                                       & (\pi_{*}\mathscr{F})_{q} \arrow[u, "\exists!", dotted] \\
+    \pi_{*}\mathscr{F}(\tilde{V}) \arrow[ru] \arrow[r] & \pi_{*}\mathscr{F}(\tilde{U}) \arrow[u]               
+    \end{tikzcd}
+    \qquad
+    \begin{tikzcd}
+                                        & \mathscr{F}_{p}          \\
+    \mathscr{F}(V) \arrow[r] \arrow[ru] & \mathscr{F}(U) \arrow[u]
+    \end{tikzcd}
+    .$$
+    Done.
+\end{solution}
+
+\end{exercise}
+
+\begin{exercise}
+If $(X, \mathcal{O}_{X})$ is a ringed space, and F is an $O_{X}$ -module,
+describe how for each $p \in X$ , $F_{p}$ is an $O_{X,p}$ -module.
+
+\begin{solution}
+    \emph{(Use \textbf{2.2.4.} directly)}.
+\end{solution}
+
+\end{exercise}
+
+\section{Morphisms of presheaves and sheaves}
+
+\begin{exercise}
+MORPHISMS OF (PRE)SHEAVES INDUCE MORPHISMS OF STALKS.
+
+If $\phi\colon\mathcal{F}\to\mathcal{G}$ is a morphism of presheaves on $X$ ,
+and $p\in X$ , describe an induced morphism of stalks
+$\phi_{p}\colon\mathcal{F}_{p}\to\mathcal{G}_{p}$ . Translation: taking the
+stalk at $p$ induces a stalkification functor $Sets_{X}\to Sets$ . (Your proof
+will extend in obvious ways. For example, if $\phi$ is a morphism of
+$\mathcal{O}_{X}$ -modules, then $\phi_{p}$ is a map of $\mathcal{O}_{X,p}$
+-modules.)
+
+\begin{solution}
+    We know elements of stalk $\mathscr{F}_{p}$ consists of $(f,U)$ where $p\in
+    U,f\in \mathscr{F}(U)$ and we have $(f,U)\sim(g,V)$ iff
+    $$
+    \exists W\subseteq U\cap V,f\mid _{W}=g\mid _{W}
+    .$$
+    Now, consider their images under the presheave morphism
+    :
+    $$
+    \phi:\mathscr{F}\longrightarrow \mathscr{G}
+    $$
+    $$
+    \phi_{U}:\left( f,U \right) \longmapsto \left( \phi\left( f \right) ,U
+    \right) 
+    $$
+    where $\left( \phi\left( f \right) ,U \right) \in \mathscr{G}_{p}$.
+    We need to show the induced map
+    $$
+    \phi_{p}:\mathscr{F}_{p}\longrightarrow \mathscr{G}_{p}
+    $$
+    is well-defined.
+
+    For
+    $\left( f,U \right) \sim\left( g,V \right) $ where $f\mid _{W}=g\mid _{W}$,
+    we have
+    \begin{align*}
+        \phi_{U}\left( f \right)\mid _{W}
+        &= \phi_{W}\left( f\mid _{W} \right) \\
+        &= \phi_{W}\left( g\mid _{W} \right) \\
+        &= \phi_{V}\left( g \right) \mid _{W} \\
+    \end{align*}
+    Done.
+\end{solution}
+
+\end{exercise}
+
+\begin{exercise}[Trivial]
+Suppose $\pi\colon X \to Y$ is a continuous map of topological spaces (i.e., a
+morphism in the category of topological spaces). Show that pushforward gives a
+functor $\pi_{*}\colon Sets_{X} \to Sets_{Y}$. Here Sets can be replaced by
+other categories. (Watch out for some possible confusion: a presheaf is a
+functor, and presheaves form a category. It may be best to forget that
+presheaves are functors for now.)
+\end{exercise}
+
+\begin{exercise}[Trivial]
+IMPORTANT EXERCISE AND DEFINITION: "SHEAF Hom".
+
+Suppose $\mathcal{F}$ and $\mathcal{G}$ are two sheaves of sets on $X$ . (In
+fact, it will suffice that $\mathcal{F}$ is a presheaf.)
+Let$\mathcal{H}om(\mathcal{F},\mathcal{G})$ be the collection of data
+$$
+\mathcal {H} o m (\mathcal {F}, \mathcal {G}) (U) := \operatorname{Mor}
+(\mathcal {F} | _ {U}, \mathcal {G} | _ {U}).
+$$
+(Recall the notation $F|_{U}$ , the restriction of the sheaf to the open set U,
+Example 2.2.8.) Show that this is a sheaf of sets on X. (To avoid a common
+confusion: the right side does not say $\operatorname{Mor}(\mathcal{F}(U),
+\mathcal{G}(U))$ .) This sheaf is called “sheaf $Hom$ ”. (Strictly speaking, we
+should reserve Hom for when we are in an additive category, so this should
+possibly be called “sheaf Mor”. But the terminology “sheaf Hom” is too
+established to uproot.) It will be clear from your construction that, like Hom,
+$Hom$ is a contravariant functor in its first argument and a covariant functor
+in its second argument.
+
+\begin{proof}
+    \emph{(Use the property of sheaf }$\mathscr{G}$\emph{ to establish the
+    sheaf properties in }$\hom{(\mathscr{F},\mathscr{G})}$\emph{).}
+\end{proof}
+
+\end{exercise}
+
+\begin{exercise}
+UNIMPORTANT EXERCISE (REALITY CHECK).
+
+(a) If $\mathcal{F}$ is a sheaf of sets on $X$ , then show that
+$\hom(\{\underline{p}\}, \mathcal{F}) \cong \mathcal{F}$ , where
+$\{\underline{p}\}$ is the constant sheaf "with values in the one element set
+$\{\underline{p}\}$ ".  
+
+(b) If $\mathcal{F}$ is a sheaf of abelian groups on $X$ , then show that
+$\hom_{Ab_X}(\underline{\mathbb{Z}},\mathcal{F}) \cong \mathcal{F}$ (an
+isomorphism of sheaves of abelian groups).  
+
+(c) If $\mathcal{F}$ is an $\mathcal{O}_{\mathsf{X}}$ -module, then show that
+$\hom_{\operatorname{Mod}_{\mathcal{O}_{\mathsf{X}}}}(\mathcal{O}_{\mathsf{X}},\mathcal{F})
+\cong \mathcal{F}$ (an isomorphism of $\mathcal{O}_{\mathsf{X}}$ -modules).
+
+\begin{proof}
+    \emph{(Trivial. If not, follow the hint and you'll think it is.)}
+\end{proof}
+
+\end{exercise}
+
+\begin{exercise}[Trivial]
+Show that $ker_{pre} \phi$ is a presheaf. (Hint: if $U \hookrightarrow V$ ,
+define the restriction map by chasing the following diagram:
+$$
+\begin{tikzcd}
+0 \arrow[r] & \ker_{\pre}{\phi(V)} \arrow[r] \arrow[d, "\exists!", dotted] & \mathscr{F}(V) \arrow[r] \arrow[d, "{\res_{V,U}}"] & \mathscr{G}(V) \arrow[d, "{\res_{V,U}}"] \\
+0 \arrow[r] & \ker_{\pre}{\phi(U)} \arrow[r]                               & \mathscr{F}(U) \arrow[r]                           & \mathscr{G}(U)                          
+\end{tikzcd}
+$$
+You should check that the restriction maps compose as desired.)
+
+\begin{proof}
+    \emph{(Just chase the given diagram, trivial.)}
+\end{proof}
+
+\end{exercise}
+
+\begin{exercise}
+THE COKERNEL DESERVES ITS NAME.
+
+Show that the presheaf cokernel satisfies the universal property of cokernels
+(Definition 1.5.4) in the category of presheaves.
+
+\begin{proof}
+    By "the universal property of cokernels", we mean there exists unique map
+    $$
+    \begin{tikzcd}
+                                           &                                  & \mathscr{H}                                       \\
+    \mathscr{F} \arrow[r] \arrow[rru, "0"] & \mathscr{G} \arrow[r] \arrow[ru] & \coker_{\pre}{\phi} \arrow[u, "\exists!", dotted]
+    \end{tikzcd}
+    .$$
+    Specifically, it means that for any $V\subseteq X$ open, there exists unique
+    map
+    $$
+    \begin{tikzcd}
+                                              &                                     & \mathscr{H}(V)                                       \\
+    \mathscr{F}(V) \arrow[r] \arrow[rru, "0"] & \mathscr{G}(V) \arrow[r] \arrow[ru] & \coker_{\pre}{\phi(V)} \arrow[u, "\exists!", dotted]
+    \end{tikzcd}
+    ,$$
+    which is already given by the universal property of cokernel
+    $\coker_{\pre}{\phi}$ in category of abelian group.
+\end{proof}
+
+\end{exercise}
+
+\begin{exercise}[Trivial]
+EASY EXERCISE.
+
+Show (or observe) that for a topological space X with open set U, $\mathcal{F}
+\mapsto \mathcal{F}(U)$ gives a functor from presheaves of abelian groups on X,
+$Ab_{X}^{pre}$ , to abelian groups, Ab. Then show that this functor is exact.
+
+\begin{proof}
+    Chase the following diagram, and the result can be obtained immediately.
+    $$
+    \begin{tikzcd}
+    0 \arrow[r] & \mathscr{F} \arrow[r] \arrow[d] & \mathscr{G} \arrow[r] \arrow[d] & \mathscr{H} \arrow[r] \arrow[d] & 0 \\
+    0 \arrow[r] & \mathscr{F}{(U)} \arrow[r]      & \mathscr{G}{(U)} \arrow[r]      & \mathscr{H}{(U)} \arrow[r]      & 0
+    \end{tikzcd}
+    $$
+\end{proof}
+
+\end{exercise}
+
+\begin{exercise}
+Show that a sequence of presheaves $0 \rightarrow F_{1} \rightarrow F_{2}
+\rightarrow \cdots \rightarrow F_{n} \rightarrow 0$ is exact if and only if $0
+\rightarrow \mathcal{F}_{1}(\mathsf{U}) \rightarrow \mathcal{F}_{2}(\mathsf{U})
+\rightarrow \cdots \rightarrow \mathcal{F}_{n}(\mathsf{U}) \rightarrow 0$ is
+exact for all U.
+
+\begin{proof}
+    \begin{enumerate}[label=({\roman*})]
+        \item $(\Rightarrow )$:
+            Given by \textbf{Exercise 2.3.G.}, i.e. $\left( - \right) \left( U
+            \right) $ is an exact functor.
+        \item $(\Leftarrow )$:
+            \emph{(Use the definition of presheaf kernels and presheaf images
+            and break the sequence of presheaves into sequences of abelian
+            gruops.)}
+    \end{enumerate}
+\end{proof}
+
 \end{exercise}
 
 \end{document}
